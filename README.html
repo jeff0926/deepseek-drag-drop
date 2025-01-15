@@ -14,6 +14,7 @@
             margin-top: 1em;
         }
         pre {
+            position: relative;
             background: #f4f4f4;
             padding: 10px;
             border-radius: 5px;
@@ -21,6 +22,15 @@
         code {
             background: #f4f4f4;
             padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .copy-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background: #ddd;
+            padding: 5px;
             border-radius: 3px;
         }
     </style>
@@ -58,75 +68,40 @@ deepseek-drag-drop/
 
 <hr>
 
-<h2>Features</h2>
-
-<ul>
-    <li>
-        <strong>Drag-and-Drop Interface:</strong>
-        <ul>
-            <li>Users can drag and drop up to 10 files at a time.</li>
-            <li>File metadata (name, size, type, etc.) is extracted and displayed.</li>
-        </ul>
-    </li>
-    <li>
-        <strong>Metadata Extraction:</strong>
-        <ul>
-            <li>Extracts metadata such as:</li>
-            <ul>
-                <li>File name</li>
-                <li>File size (formatted in KB/MB/GB)</li>
-                <li>File type (MIME type)</li>
-                <li>Last modified date</li>
-                <li>Line count, word count, and character count (for text files)</li>
-            </ul>
-        </ul>
-    </li>
-    <li>
-        <strong>DeepSeek API Integration:</strong>
-        <ul>
-            <li>Users can input a <strong>system prompt</strong> and a <strong>user prompt</strong>.</li>
-            <li>Selected files and prompts are sent to the DeepSeek API for analysis.</li>
-            <li>The API response is displayed in the "LLM Response" section.</li>
-        </ul>
-    </li>
-</ul>
-
-<hr>
-
 <h2>Setup Instructions</h2>
 
 <h3>1. Clone the Repository</h3>
 <p>Clone the repository to your local machine:</p>
 <pre><code>git clone &lt;repository-url&gt;
 cd deepseek-drag-drop
-</code></pre>
+</code><button class="copy-icon" onclick="copyToClipboard(this)">Copy</button></pre>
 
 <h3>2. Set Up a Virtual Environment</h3>
 <p>Create and activate a virtual environment:</p>
 <pre><code>python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-</code></pre>
+</code><button class="copy-icon" onclick="copyToClipboard(this)">Copy</button></pre>
 
 <h3>3. Install Dependencies</h3>
 <p>Install the required Python packages:</p>
 <pre><code>pip install -r requirements.txt
-</code></pre>
+</code><button class="copy-icon" onclick="copyToClipboard(this)">Copy</button></pre>
 
 <h3>4. Set Up Environment Variables</h3>
 <p>Create a <code>.env</code> file in the root directory and add your DeepSeek API key:</p>
 <pre><code>DEEPSEEK_API_KEY=your_api_key_here
 FLASK_ENV=development
-</code></pre>
+</code><button class="copy-icon" onclick="copyToClipboard(this)">Copy</button></pre>
 
 <h3>5. Run the Flask App</h3>
 <p>Start the Flask development server:</p>
 <pre><code>python run.py
-</code></pre>
+</code><button class="copy-icon" onclick="copyToClipboard(this)">Copy</button></pre>
 
 <h3>6. Access the App</h3>
 <p>Open your browser and navigate to:</p>
 <pre><code>http://127.0.0.1:5000/
-</code></pre>
+</code><button class="copy-icon" onclick="copyToClipboard(this)">Copy</button></pre>
 
 <hr>
 
@@ -223,6 +198,16 @@ FLASK_ENV=development
 <p>Your Name: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
 <p>Project Repository: <a href="<repository-url>">&lt;repository-url&gt;</a></p>
 
+<script>
+function copyToClipboard(button) {
+    const codeBlock = button.previousElementSibling.textContent;
+    navigator.clipboard.writeText(codeBlock).then(() => {
+        alert('Code copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy text: ', err);
+    });
+}
+</script>
+
 </body>
 </html>
-

@@ -1,0 +1,635 @@
+# Event System Requirements for Product Tour Web Component 
+
+ 
+
+## Table of Contents 
+
+1. [Technical Requirement Document for Events](#1-technical-requirement-document-for-events) 
+
+2. [Detailed Technical Specification](#2-detailed-technical-specification) 
+
+3. [Events Requirements Technical Document](#3-events-requirements-technical-document) 
+
+4. [Events Requirements in Jira Story Format](#4-events-requirements-in-jira-story-format) 
+
+ 
+
+These events will be available in a Micro Frontend (MFE) adaptor layer scenario. In an MFE architecture, the adaptor layer serves as an intermediary between different micro frontends or between micro frontends and the main application. The custom events bubbling up from the web component would be accessible at this layer, allowing the adaptor to capture, transform, or relay these events as needed for inter-MFE communication or for integration with the larger application ecosystem 
+
+ 
+
+ 
+
+## 1. Technical Requirement Document for Events 
+
+ 
+
+### 1.1 Overview 
+
+The Product Tour web component requires an event system that allows it to communicate with the host webpage DOM. This system will utilize Adobe Analytics for link tracking and event data layer. 
+
+ 
+
+### 1.2 Requirements 
+
+ 
+
+#### #### 1.2.1 Event Bubbling and Propagation 
+
+- The web component must dispatch custom events that bubble up to the host webpage DOM. 
+
+- Events should be captured and processed by a separate events.js file. 
+
+- When creating custom events, set both `bubbles` and `composed` flags to `true`: 
+
+  ```javascript 
+
+  new CustomEvent('eventName', { 
+
+    bubbles: true, 
+
+    composed: true, 
+
+    detail: { /* event data */ } 
+
+  }) 
+
+  ``` 
+
+- The `composed: true` flag is crucial for allowing events to cross shadow DOM boundaries. 
+
+- Use event delegation in the host page to efficiently handle events from multiple instances of the web component. 
+
+- Implement a `stopPropagation()` mechanism for cases where event bubbling needs to be controlled or stopped. 
+
+- Consider using a custom event prefix (e.g., 'product-tour:') to avoid naming conflicts with other events in the host page. 
+
+- Ensure that all interactive elements within the shadow DOM use appropriate ARIA attributes for accessibility, as some events may not naturally bubble. 
+
+- For performance optimization, use passive event listeners where appropriate: 
+
+  ```javascript 
+
+  document.addEventListener('eventName', handler, { passive: true }); 
+
+  ``` 
+
+- Implement error handling for cases where event bubbling fails or events are not captured as expected. 
+
+- Document the event bubbling behavior clearly for developers integrating the web component. 
+
+ 
+
+#### 1.2.2 Event Types 
+
+- tourStarted: Triggered when the tour begins. 
+
+- imageLoaded: Triggered when an image is loaded in the tour. 
+
+- accordionHeaderClicked: Triggered when an accordion header is clicked. 
+
+- carouselPrevClicked: Triggered when the previous button in a carousel is clicked. 
+
+- carouselNextClicked: Triggered when the next button in a carousel is clicked. 
+
+ 
+
+#### 1.2.3 Event Data 
+
+- Each event should carry relevant data about the action performed. 
+
+- Data should include, but not limited to: event name, section name, step number, and any other relevant details. 
+
+ 
+
+#### 1.2.4 Adobe Analytics Integration 
+
+- Events should be compatible with Adobe Analytics link tracking. 
+
+- Events should populate the Adobe Analytics event data layer with relevant information. 
+
+ 
+
+#### 1.2.5 Logging 
+
+- All events should be logged for debugging purposes when in development mode. 
+
+ 
+
+#### 1.2.6 Performance 
+
+- The event system should have minimal impact on the overall performance of the web component and the host webpage. 
+
+ 
+
+#### 1.2.7 Standardization 
+
+- Develop a standardized approach for event dispatch and capture in web components. 
+
+- Create a set of best practices and conventions for event naming, data structure, and handling. 
+
+- Ensure the standard is scalable and can be applied to future web components. 
+
+- Document the standard for easy reference and onboarding of new developers. 
+
+ 
+
+### 1.3 Constraints 
+
+- The event system must work across different browsers and devices. 
+
+- It should not interfere with any existing event listeners on the host webpage. 
+
+ 
+
+### 1.4 Assumptions 
+
+- The host webpage will have Adobe Analytics properly configured. 
+
+- The events.js file will have access to the necessary Adobe Analytics methods. 
+
+ 
+
+### 1.5 Dependencies 
+
+- Adobe Analytics library 
+
+- Product Tour web component implementation 
+
+ 
+
+## 2. Detailed Technical Specification 
+
+ 
+
+### 2.1 Event Dispatching 
+
+- The Product Tour web component will use the CustomEvent API to create and dispatch events. 
+
+- Events will be dispatched with the bubbles and composed options set to true to ensure they propagate through the shadow DOM boundary. 
+
+- Example: 
+
+  ```javascript 
+
+  this.dispatchEvent(new CustomEvent('tourStarted', { 
+
+    detail: { message: 'Tour has started!' }, 
+
+    bubbles: true, 
+
+    composed: true 
+
+  })); 
+
+  ``` 
+
+ 
+
+### 2.2 Event Listening 
+
+- The events.js file will set up event listeners on the document object to capture events bubbling up from the web component. 
+
+- Event listeners will use event delegation to efficiently handle multiple events. 
+
+- Example: 
+
+  ```javascript 
+
+  document.addEventListener('tourStarted', (event) => logEvent('tourStarted', event.detail)); 
+
+  ``` 
+
+ 
+
+### 2.3 Event Data Structure (EXAMPLE TBD with Analytics) 
+
+- Each event will follow a consistent data structure: 
+
+  ```javascript 
+
+  { 
+
+    "$schema": "https://json-schema.org/draft/2019-09/schema", 
+
+    "type": "object", 
+
+    "properties": { 
+
+      "event": { 
+
+        "type": "string", 
+
+        "description": "Name of the event" 
+
+      }, 
+
+      "pageComponents": { 
+
+        "type": "object", 
+
+        "properties": { 
+
+          "pageComponents": { 
+
+            "type": "array", 
+
+            "items": [ 
+
+              { 
+
+                "name": { 
+
+                  "type": "string", 
+
+                  "description": "Name of component clicked" 
+
+                } 
+
+              } 
+
+            ] 
+
+          } 
+
+        } 
+
+      } 
+
+    } 
+
+  } 
+
+  ``` 
+
+ 
+
+### 2.4 Adobe Analytics Integration 
+
+- The events.js file will populate the Adobe Analytics data layer with event information. 
+
+- Example: 
+
+  ```javascript 
+
+  btn.setAttribute("data-analytics-aa-tracking", "true"); 
+
+  btn.setAttribute("data-analytics-aa-region", "Body"); 
+
+  btn.setAttribute("data-analytics-aa-mediatitle", this.v.attribute + " (mobile)"); 
+
+  btn.setAttribute("data-analytics-aa-mediatype", "Demo"); 
+
+  btn.setAttribute("data-analytics-aa-linkname", this.config.overview.ctaText); 
+
+  btn.setAttribute("data-analytics-aa-linktitle", this.config.overview.name); 
+
+  ``` 
+
+ 
+
+### 2.5 Logging 
+
+- A logEvent function will be implemented in events.js to handle logging of all events. 
+
+- Logging will only occur when isDevMode is set to true. 
+
+- Example: 
+
+  ```javascript 
+
+  function logEvent(eventType, detail) { 
+
+    if (isDevMode) { 
+
+      console.log(`Event: ${eventType}, Detail: ${JSON.stringify(detail)}, Timestamp: ${new Date().toISOString()}`); 
+
+    } 
+
+  } 
+
+  ``` 
+
+ 
+
+### 2.6 Performance Considerations 
+
+- Event listeners will be passive where possible to improve scrolling performance. 
+
+- Event data will be kept minimal to reduce overhead in event dispatching and processing. 
+
+ 
+
+### 2.7 Cross-browser Compatibility 
+
+- The CustomEvent API will be used with a polyfill for older browsers if necessary (?) 
+
+- Event listener options (like passive) will be feature-detected before use. 
+
+ 
+
+## 3. Events Requirements Technical Document 
+
+ 
+
+### 3.1 Event System Overview (TBD) 
+
+The Product Tour web component requires an event system that allows it to communicate user interactions and state changes to the host webpage. This system will leverage custom events and integrate with Adobe Analytics for tracking and analysis. 
+
+ 
+
+### 3.2 Event Types and Triggers 
+
+1. tourStarted 
+
+   - Triggered when: The tour is initialized and ready to begin. 
+
+   - Data: { message: 'Tour has started!' } 
+
+ 
+
+2. imageLoaded 
+
+   - Triggered when: An image in the tour completes loading. 
+
+   - Data: { imageUrl: string, loadTime: number } 
+
+ 
+
+3. accordionHeaderClicked 
+
+   - Triggered when: User clicks on an accordion header to expand/collapse a section. 
+
+   - Data: { sectionName: string, isExpanded: boolean } 
+
+ 
+
+4. carouselPrevClicked 
+
+   - Triggered when: User clicks the "previous" button in a carousel. 
+
+   - Data: { sectionName: string, currentSlide: number } 
+
+ 
+
+5. carouselNextClicked 
+
+   - Triggered when: User clicks the "next" button in a carousel. 
+
+   - Data: { sectionName: string, currentSlide: number } 
+
+ 
+
+### 3.3 Event Data Structure 
+
+All events will follow a consistent JSON schema structure for easy parsing and analysis. 
+
+****TBD with Analytics Team***** 
+
+ 
+
+### 3.4 Adobe Analytics Integration 
+
+- Each interactive element will include data-analytics-aa-* attributes for link tracking. 
+
+- Events will populate the Adobe Analytics data layer with relevant information. 
+
+ 
+
+### 3.5 Event Logging 
+
+A logging system will be implemented for debugging purposes, active only in development mode. 
+
+ 
+
+### 3.6 Performance and Compatibility 
+
+- The event system will be optimized for performance with minimal overhead. 
+
+- Cross-browser compatibility will be ensured, with polyfills used where necessary. 
+
+ 
+
+### 3.7 Implementation Details 
+
+- The web component (ProductTour.js) will dispatch custom events. 
+
+- A separate file (events.js) will handle listening for these events and processing them. 
+
+ 
+
+### 3.8 Testing Requirements 
+
+- Unit tests for each event type to ensure correct data is being sent. 
+
+- Integration tests to verify events are bubbling up to the host DOM correctly. 
+
+- End-to-end tests to confirm Adobe Analytics is receiving and processing the events accurately. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+DRAFT STORIES TBDefined  
+
+ 
+
+## 4. Events Requirements in Jira Story Format 
+
+ 
+
+### Epic: Implement Event System for Product Tour Web Component 
+
+ 
+
+#### Story 1: Set up Custom Event Dispatching in Web Component 
+
+As a developer, I want the Product Tour web component to dispatch custom events so that user interactions can be tracked and analyzed. 
+
+ 
+
+Acceptance Criteria: 
+
+- Implement tourStarted event 
+
+- Implement imageLoaded event 
+
+- Implement accordionHeaderClicked event 
+
+- Implement carouselPrevClicked event 
+
+- Implement carouselNextClicked event 
+
+- Ensure all events bubble up to the host DOM 
+
+- Include relevant data with each event 
+
+- Add unit tests for each event type 
+
+ 
+
+#### Story 2: Create Event Listening and Processing System 
+
+As a developer, I want a separate system to listen for and process events from the web component so that we can decouple event handling from component logic. 
+
+ 
+
+Acceptance Criteria: 
+
+- Create events.js file 
+
+- Implement event listeners for all custom events 
+
+- Create logEvent function for debugging 
+
+- Ensure event listening works across browsers 
+
+- Add integration tests to verify event bubbling and capturing 
+
+ 
+
+#### Story 3: Integrate Adobe Analytics Tracking 
+
+As a marketing analyst, I want the event system to integrate with Adobe Analytics so that we can track user interactions with the Product Tour. 
+
+ 
+
+Acceptance Criteria: 
+
+- Add data-analytics-aa-* attributes to interactive elements 
+
+- Implement logic to populate Adobe Analytics data layer 
+
+- Ensure all relevant event data is sent to Adobe Analytics 
+
+- Add end-to-end tests for Adobe Analytics integration 
+
+ 
+
+#### Story 4: Implement Event Logging System 
+
+As a developer, I want a logging system for events so that I can debug issues in development mode. 
+
+ 
+
+Acceptance Criteria: 
+
+- Create isDevMode flag 
+
+- Implement logEvent function that only logs in dev mode 
+
+- Ensure all events are passed through the logging system 
+
+- Add toggle for enabling/disabling logging 
+
+ 
+
+#### Story 5: Optimize Event System Performance 
+
+As a user, I want the event system to have minimal impact on the Product Tour's performance so that I have a smooth experience using the tour. 
+
+ 
+
+Acceptance Criteria: 
+
+- Use passive event listeners where applicable 
+
+- Minimize event data payload size 
+
+- Implement debouncing for frequent events (if any) 
+
+- Conduct performance tests to ensure minimal overhead 
+
+ 
+
+#### Story 6: Ensure Cross-browser Compatibility 
+
+As a user, I want the event system to work consistently across different browsers so that I have a uniform experience regardless of my browser choice. 
+
+ 
+
+Acceptance Criteria: 
+
+- Test event system in latest versions of Chrome, Firefox, Safari, and Edge 
+
+- Implement necessary polyfills for older browsers 
+
+- Add cross-browser tests to the test suite 
+
+ 
+
+#### Story 7: Create Web Component Event Dispatch and Capture Standard 
+
+As a lead developer, I want to establish a standardized approach for event dispatch and capture in web components so that we can ensure consistency, improve maintainability, and facilitate easier integration of current and future web components. 
+
+ 
+
+Acceptance Criteria: 
+
+- Develop a naming convention for custom events (e.g., componentName:eventType) 
+
+- Create a standardized event data structure that can be adapted for different components 
+
+- Establish best practices for event bubbling and composition 
+
+- Define guidelines for integrating with analytics systems (e.g., Adobe Analytics) 
+
+- Create a standard for error and edge case handling in events 
+
+- Develop a documentation template for describing component events 
+
+- Create a set of utility functions or a small library to assist with standard event handling 
+
+- Ensure the standard is compatible with shadow DOM encapsulation 
+
+- Write comprehensive documentation explaining the standard, its implementation, and benefits 
+
+- Create examples demonstrating the standard's application in various scenarios 
+
+- Develop a migration guide for updating existing components to the new standard 
+
+- Conduct a team review and training session on the new standard 
+
+ 
+
+Tasks: 
+
+1. Research existing event standards and best practices in web components 
+
+2. Draft initial proposal for the event standard 
+
+3. Review proposal with the development team and gather feedback 
+
+4. Revise and finalize the event standard documentation 
+
+5. Create utility functions or library for standard event handling 
+
+6. Develop example implementations using the new standard 
+
+7. Update the Product Tour component to adhere to the new standard 
+
+8. Create migration guide for existing components 
+
+9. Conduct team training session on the new standard 
+
+10. Implement the standard in one additional web component as a proof of concept 
+
+11. Gather feedback and make necessary adjustments to the standard 
+
+Metadata 
+
+Tags 
+
+product/sap-ariba-category-management, product/sap-ariba-buying-and-invoicing,  
+
+ 

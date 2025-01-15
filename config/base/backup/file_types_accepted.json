@@ -1,0 +1,754 @@
+{
+    "extensions": [
+        {
+            "extension": ".js",
+            "confidence": 0.75,
+            "desc": "JavaScript source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this JavaScript file's purpose and its role in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".ts",
+            "confidence": 0.75,
+            "desc": "TypeScript source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this TypeScript file, highlighting its functionality within the system.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".jsx",
+            "confidence": 0.75,
+            "desc": "JSX (JavaScript XML) source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this JSX file, focusing on its structure and purpose.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".tsx",
+            "confidence": 0.75,
+            "desc": "TypeScript JSX source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this TSX file's functionality and its use in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".html",
+            "confidence": 0.75,
+            "desc": "HTML document",
+            "type": "Web",
+            "supports_llm": true,
+            "default_prompt": "Summarize the content and structure of this HTML document, explaining its role in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".css",
+            "confidence": 0.75,
+            "desc": "Cascading Style Sheets",
+            "type": "Web",
+            "supports_llm": true,
+            "default_prompt": "Summarize this CSS file's styles and how it impacts the repository's visual elements.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".scss",
+            "confidence": 0.75,
+            "desc": "Sass (Syntactically Awesome StyleSheets)",
+            "type": "Web",
+            "supports_llm": true,
+            "default_prompt": "Summarize this SCSS file and explain its purpose in the repository's styling.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".less",
+            "confidence": 0.75,
+            "desc": "Less CSS",
+            "type": "Web",
+            "supports_llm": true,
+            "default_prompt": "Summarize this LESS file's styles and how it affects the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".vue",
+            "confidence": 0.75,
+            "desc": "Vue.js component",
+            "type": "Web",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Vue.js component and explain its role in the repository's front-end.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".py",
+            "confidence": 0.8,
+            "desc": "Python source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Python file, focusing on its functionality and role in the repository.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".java",
+            "confidence": 0.8,
+            "desc": "Java source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Java file, highlighting its purpose and how it interacts with other files.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".go",
+            "confidence": 0.8,
+            "desc": "Go source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Go file, describing its functionality and role in the repository.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".rb",
+            "confidence": 0.8,
+            "desc": "Ruby source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Ruby file's purpose and its role within the repository.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".php",
+            "confidence": 0.8,
+            "desc": "PHP source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this PHP file's role in the repository and its main functionalities.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".cs",
+            "confidence": 0.8,
+            "desc": "C# source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this C# file, explaining its purpose and how it interacts within the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".rs",
+            "confidence": 0.8,
+            "desc": "Rust source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Rust file, focusing on its functionality and purpose in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".scala",
+            "confidence": 0.8,
+            "desc": "Scala source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Scala file, highlighting its use and relevance in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".kt",
+            "confidence": 0.8,
+            "desc": "Kotlin source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Kotlin file, emphasizing its functionality and integration in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".swift",
+            "confidence": 0.85,
+            "desc": "Swift source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Swift file's purpose and its interactions within the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".dart",
+            "confidence": 0.8,
+            "desc": "Dart source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this Dart file and its role in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".h",
+            "confidence": 0.85,
+            "desc": "C/C++ header file",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this header file's definitions and their impact on the repository.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".c",
+            "confidence": 0.85,
+            "desc": "C source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this C file, highlighting its role in the repository.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".cpp",
+            "confidence": 0.85,
+            "desc": "C++ source code",
+            "type": "Source Code",
+            "supports_llm": true,
+            "default_prompt": "Summarize this C++ file's purpose and its use within the repository.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".json",
+            "confidence": 0.85,
+            "desc": "JSON configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Analyze this JSON file for structural issues and summarize its purpose.",
+            "default_char_limit": 200,
+            "content": null
+        },
+        {
+            "extension": ".yaml",
+            "confidence": 0.85,
+            "desc": "YAML configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the configuration in this YAML file and its impact on deployment.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".yml",
+            "confidence": 0.85,
+            "desc": "YAML configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the configuration in this YAML file and its impact on deployment.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".ini",
+            "confidence": 0.8,
+            "desc": "INI configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the key settings in this INI file and their purpose.",
+            "default_char_limit": 200,
+            "content": null
+        },
+        {
+            "extension": ".conf",
+            "confidence": 0.8,
+            "desc": "Configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the configuration in this file and its role in the system.",
+            "default_char_limit": 200,
+            "content": null
+        },
+        {
+            "extension": ".properties",
+            "confidence": 0.8,
+            "desc": "Properties configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the settings in this properties file and their impact on the application.",
+            "default_char_limit": 200,
+            "content": null
+        },
+        {
+            "extension": ".xml",
+            "confidence": 0.85,
+            "desc": "XML configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the structure and purpose of this XML file in the system.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".toml",
+            "confidence": 0.8,
+            "desc": "TOML configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the configuration in this TOML file and its role in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".tf",
+            "confidence": 0.85,
+            "desc": "Terraform configuration file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the Terraform configuration and its intended infrastructure changes.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".tfvars",
+            "confidence": 0.8,
+            "desc": "Terraform variables file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the variables defined in this Terraform file and their purpose.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "Dockerfile",
+            "confidence": 0.9,
+            "desc": "Docker configuration file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Analyze this Dockerfile and summarize the container's configuration and purpose.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".dockerignore",
+            "confidence": 0.8,
+            "desc": "Docker ignore file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the ignored files specified in this Dockerignore file and their impact on the container build.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".md",
+            "confidence": 0.9,
+            "desc": "Markdown documentation file",
+            "type": "Documentation",
+            "supports_llm": true,
+            "default_prompt": "Summarize the content of this Markdown file, highlighting key sections and missing information.",
+            "default_char_limit": 1000,
+            "content": null
+        },
+        {
+            "extension": ".rst",
+            "confidence": 0.85,
+            "desc": "reStructuredText file",
+            "type": "Documentation",
+            "supports_llm": true,
+            "default_prompt": "Summarize the content of this reStructuredText file and suggest areas for improvement.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".txt",
+            "confidence": 0.8,
+            "desc": "Plain text file",
+            "type": "Documentation",
+            "supports_llm": true,
+            "default_prompt": "Summarize the content of this text file and its relevance to the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".readme",
+            "confidence": 0.9,
+            "desc": "Readme documentation file",
+            "type": "Documentation",
+            "supports_llm": true,
+            "default_prompt": "Summarize this README file, emphasizing its purpose and any missing sections.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".pdf",
+            "confidence": 0.8,
+            "desc": "PDF document",
+            "type": "Documentation",
+            "supports_llm": true,
+            "default_prompt": "Summarize the key points from this PDF document and its relevance to the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".log",
+            "confidence": 0.8,
+            "desc": "Log file",
+            "type": "Log",
+            "supports_llm": true,
+            "default_prompt": "Analyze this log file for errors, anomalies, and key events.",
+            "default_char_limit": 200,
+            "content": null
+        },
+        {
+            "extension": ".csv",
+            "confidence": 0.8,
+            "desc": "CSV data file",
+            "type": "Data",
+            "supports_llm": true,
+            "default_prompt": "Summarize the data trends in this CSV file and suggest visualizations.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".xlsx",
+            "confidence": 0.8,
+            "desc": "Excel spreadsheet",
+            "type": "Data",
+            "supports_llm": true,
+            "default_prompt": "Summarize the data in this Excel file and highlight key insights.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".gitignore",
+            "confidence": 0.85,
+            "desc": "Git ignore file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the files and directories ignored by this Gitignore file and their impact on version control.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".editorconfig",
+            "confidence": 0.85,
+            "desc": "Editor configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the coding style rules defined in this EditorConfig file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "tslint.json",
+            "confidence": 0.8,
+            "desc": "TSLint configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the linting rules defined in this TSLint configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "pylintrc",
+            "confidence": 0.8,
+            "desc": "Pylint configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the linting rules defined in this Pylint configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".mmd",
+            "confidence": 0.85,
+            "desc": "Mermaid diagram file",
+            "type": "Graph",
+            "supports_llm": true,
+            "default_prompt": "Generate a flowchart in Mermaid format based on this file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".dot",
+            "confidence": 0.85,
+            "desc": "Graphviz DOT file",
+            "type": "Graph",
+            "supports_llm": true,
+            "default_prompt": "Analyze this DOT file and generate a dependency graph.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".puml",
+            "confidence": 0.85,
+            "desc": "PlantUML diagram file",
+            "type": "Graph",
+            "supports_llm": true,
+            "default_prompt": "Summarize or generate a UML diagram based on this file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".drawio",
+            "confidence": 0.85,
+            "desc": "Draw.io diagram file",
+            "type": "Graph",
+            "supports_llm": true,
+            "default_prompt": "Summarize the diagram in this Draw.io file and its role in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".lucid",
+            "confidence": 0.85,
+            "desc": "Lucidchart diagram file",
+            "type": "Graph",
+            "supports_llm": true,
+            "default_prompt": "Analyze this Lucidchart file and describe its purpose in the system architecture.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".pem",
+            "confidence": 0.85,
+            "desc": "PEM certificate file",
+            "type": "Security",
+            "supports_llm": true,
+            "default_prompt": "Summarize the purpose of this PEM file and its relevance to the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".xsd",
+            "confidence": 0.85,
+            "desc": "XML Schema Definition file",
+            "type": "Schema",
+            "supports_llm": true,
+            "default_prompt": "Analyze this XSD file and summarize its structure and validation purpose.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".sql",
+            "confidence": 0.8,
+            "desc": "SQL script file",
+            "type": "Database",
+            "supports_llm": true,
+            "default_prompt": "Summarize the purpose of this SQL script and its impact on the repository's database.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".bat",
+            "confidence": 0.8,
+            "desc": "Batch script file",
+            "type": "Script",
+            "supports_llm": true,
+            "default_prompt": "Summarize this batch script's purpose and its role in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".sh",
+            "confidence": 0.8,
+            "desc": "Shell script file",
+            "type": "Script",
+            "supports_llm": true,
+            "default_prompt": "Summarize this shell script's functionality and how it interacts with the repository.",
+            "default_char_limit": 300,
+            "content": null
+        },
+        {
+            "extension": ".travis.yml",
+            "confidence": 0.8,
+            "desc": "Travis CI configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the pipeline steps defined in this Travis CI configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "Jenkinsfile",
+            "confidence": 0.8,
+            "desc": "Jenkins CI/CD pipeline configuration",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the pipeline stages and tasks defined in this Jenkinsfile.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".github/workflows/",
+            "confidence": 0.8,
+            "desc": "GitHub Actions workflow directory",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the workflows defined in this GitHub Actions directory.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".prettierrc",
+            "confidence": 0.8,
+            "desc": "Prettier configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the formatting rules defined in this Prettier configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".cloudformation.yaml",
+            "confidence": 0.8,
+            "desc": "AWS CloudFormation template file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the resources and dependencies defined in this AWS CloudFormation template.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "docker-compose.yml",
+            "confidence": 0.8,
+            "desc": "Docker Compose configuration file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the services and dependencies defined in this Docker Compose file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".k8s.yaml",
+            "confidence": 0.8,
+            "desc": "Kubernetes configuration file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the deployments and services defined in this Kubernetes configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "kubernetes.yaml",
+            "confidence": 0.8,
+            "desc": "Kubernetes configuration file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the deployments and services defined in this Kubernetes configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "azure-pipelines.yml",
+            "confidence": 0.8,
+            "desc": "Azure Pipelines configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the pipeline stages defined in this Azure Pipelines configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".vsdx",
+            "confidence": 0.8,
+            "desc": "Microsoft Visio diagram file",
+            "type": "Graph",
+            "supports_llm": true,
+            "default_prompt": "Summarize the diagram defined in this Visio file and its purpose in the repository.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".bicep",
+            "confidence": 0.8,
+            "desc": "Azure Bicep infrastructure file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the resources and modules defined in this Azure Bicep file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".eslintrc",
+            "confidence": 0.8,
+            "desc": "ESLint configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the linting rules defined in this ESLint configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "values.yaml",
+            "confidence": 0.8,
+            "desc": "Helm chart values file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the Helm chart values defined in this file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".env",
+            "confidence": 0.8,
+            "desc": "Environment variables file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the environment variables defined in this file and their impact on the repository.",
+            "default_char_limit": 200,
+            "content": null
+        },
+        {
+            "extension": ".arm",
+            "confidence": 0.8,
+            "desc": "Azure Resource Manager template file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the resources and dependencies defined in this Azure Resource Manager template.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".gitlab-ci.yml",
+            "confidence": 0.8,
+            "desc": "GitLab CI/CD pipeline configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the pipeline stages defined in this GitLab CI/CD configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": ".circleci/config.yml",
+            "confidence": 0.8,
+            "desc": "CircleCI configuration file",
+            "type": "Configuration",
+            "supports_llm": true,
+            "default_prompt": "Summarize the pipeline stages defined in this CircleCI configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        },
+        {
+            "extension": "helm.yaml",
+            "confidence": 0.8,
+            "desc": "Helm chart configuration file",
+            "type": "Infrastructure",
+            "supports_llm": true,
+            "default_prompt": "Summarize the configurations defined in this Helm chart configuration file.",
+            "default_char_limit": 500,
+            "content": null
+        }
+    ]
+}

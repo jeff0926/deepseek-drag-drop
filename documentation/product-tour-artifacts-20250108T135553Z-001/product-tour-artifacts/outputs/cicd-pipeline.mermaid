@@ -1,0 +1,17 @@
+flowchart TD
+    Dev[Development] -->|Push| Main
+    Main[Main Branch] -->|Create Release| Release[GitHub Release]
+    Release -->|Trigger| Action[GitHub Action]
+    Action -->|Build| Assets[Build Assets]
+    Assets -->|Upload| CDN[Akamai NetStorage]
+    CDN -->|Purge Cache| Edge[CDN Edge]
+    
+    subgraph "Version Management"
+        Assets --> Versioned["/dxf/v{version}/"]
+        Assets --> Latest["/dxf/latest/"]
+    end
+
+    subgraph "Cache Management"
+        Edge --> Tagged[Cache Tags]
+        Tagged --> Purge[Cache Purge]
+    end

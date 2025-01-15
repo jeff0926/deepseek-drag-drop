@@ -1,0 +1,29 @@
+graph TD
+    subgraph Client Browser
+        WC[Product Tour Web Component]
+        DOM[DOM Elements]
+        Events[Event System]
+    end
+    
+    subgraph Adobe Edge Delivery Services
+        Word[MS Word Document]
+        Preview[Preview Service]
+        HTML[Plain HTML Content]
+    end
+    
+    subgraph UDEx CDN
+        CDN[Product Tour JS]
+        Versions[Versioned Assets]
+    end
+
+    Word -->|Edit/Author| Preview
+    Preview -->|Generate| HTML
+    HTML -->|Fetch| WC
+    CDN -->|Load Component| WC
+    WC -->|Create| DOM
+    WC -->|Dispatch| Events
+    DOM -->|User Interaction| Events
+
+    style WC fill:#f9f,stroke:#333,stroke-width:2px
+    style HTML fill:#bbf,stroke:#333,stroke-width:2px
+    style CDN fill:#bfb,stroke:#333,stroke-width:2px

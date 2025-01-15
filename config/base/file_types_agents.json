@@ -1,0 +1,140 @@
+{
+  "data": {
+    "agentTypes": [
+      {
+        "name": "Code Analysis Agent",
+        "priority": "Medium",
+        "description": "Performs static code analysis, quality checks, and generates unit tests.",
+        "capabilities": [
+          "Syntax highlighting",
+          "Code completion",
+          "Static analysis (e.g., finding errors, suggesting improvements)",
+          "Refactoring",
+          "Generating unit tests"
+        ],
+        "fileTypes": [
+          ".js", ".ts", ".jsx", ".tsx", ".py", ".java", ".go", ".rb", ".php", ".cs", ".rs", ".scala", ".kt", ".swift", ".c", ".cpp", ".h"
+        ]
+      },
+      {
+        "name": "Infrastructure-as-Code Agent",
+        "priority": "High",
+        "description": "Analyzes IaC files for infrastructure planning and deployment.",
+        "capabilities": [
+          "Terraform: Plan, apply, and destroy infrastructure",
+          "Kubernetes: Deploy, manage, and troubleshoot Kubernetes applications",
+          "Docker: Build, push, and run Docker images and containers",
+          "CloudFormation: Manage AWS resources",
+          "Bicep: Manage Azure resources"
+        ],
+        "fileTypes": [
+          ".tf", ".tfvars", ".bicep", ".arm", ".cloudformation.yaml", "Dockerfile", "docker-compose.yml", ".dockerignore", "kubernetes.yaml", ".k8s.yaml", "helm.yaml", "values.yaml"
+        ]
+      },
+      {
+        "name": "Configuration Management Agent",
+        "priority": "Medium",
+        "description": "Validates and assists with configuration files.",
+        "capabilities": [
+          "Validate configuration files against schemas",
+          "Assist in writing and managing configuration files",
+          "Detect and resolve configuration conflicts"
+        ],
+        "fileTypes": [
+          ".env", ".ini", ".conf", ".properties", ".xml", ".toml", ".yaml", ".yml", ".json"
+        ]
+      },
+      {
+        "name": "CI/CD Pipeline Agent",
+        "priority": "High",
+        "description": "Analyzes and optimizes continuous integration and deployment pipelines.",
+        "capabilities": [
+          "Analyze and visualize CI/CD pipelines",
+          "Suggest improvements to pipeline efficiency and reliability",
+          "Help debug and troubleshoot pipeline failures"
+        ],
+        "fileTypes": [
+          ".gitlab-ci.yml", ".github/workflows/", "azure-pipelines.yml", ".travis.yml", ".circleci/config.yml", "Jenkinsfile"
+        ]
+      },
+      {
+        "name": "Project Management Agent",
+        "priority": "Medium",
+        "description": "Analyzes project organization, best practices, and maintainability.",
+        "capabilities": [
+          "Analyze project structure and best practices",
+          "Suggest improvements to project organization and maintainability",
+          "Generate reports on project health and code quality"
+        ],
+        "fileTypes": [
+          ".gitignore", ".editorconfig", ".prettierrc", ".eslintrc", "tslint.json", "pylintrc"
+        ]
+      },
+      {
+        "name": "Web Development Agent",
+        "priority": "Medium",
+        "description": "Assists in web development and performance optimization.",
+        "capabilities": [
+          "Assist with HTML, CSS, and JavaScript development",
+          "Provide suggestions for improving website performance and accessibility",
+          "Help debug and troubleshoot web applications"
+        ],
+        "fileTypes": [
+          ".html", ".css", ".scss", ".less", ".vue"
+        ]
+      },
+      {
+        "name": "Documentation Management Agent",
+        "priority": "Medium",
+        "description": "Assists in creating and analyzing documentation.",
+        "capabilities": [
+          "Assist in writing and organizing documentation",
+          "Analyze document structure for clarity and readability",
+          "Provide insights on missing or incomplete documentation"
+        ],
+        "fileTypes": [
+          ".md", ".rst", ".txt", ".pdf"
+        ]
+      },
+      {
+        "name": "Data Analysis Agent",
+        "priority": "Medium",
+        "description": "Processes and analyzes data for insights.",
+        "capabilities": [
+          "Process and analyze data files",
+          "Provide insights and statistical summaries",
+          "Suggest data visualization methods"
+        ],
+        "fileTypes": [
+          ".csv", ".xlsx"
+        ]
+      },
+      {
+        "name": "Logging and Monitoring Agent",
+        "priority": "Low",
+        "description": "Analyzes and optimizes logging and monitoring practices.",
+        "capabilities": [
+          "Analyze log files for patterns and errors",
+          "Provide suggestions for improving logging practices",
+          "Generate reports from log data"
+        ],
+        "fileTypes": [
+          ".log"
+        ]
+      },
+      {
+        "name": "Graphing and Architecture Agent",
+        "priority": "Low",
+        "description": "Generates and analyzes architectural diagrams and graphs.",
+        "capabilities": [
+          "Generate and analyze graphs and architecture diagrams",
+          "Assist in creating and modifying diagrams",
+          "Provide insights into system architecture"
+        ],
+        "fileTypes": [
+          ".mmd", ".drawio", ".vsdx", ".lucid", ".dot", ".puml"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Repository Setup</title>
+</head>
+<body>
+    <h1>Step-by-Step Tutorial: Setting Up a GitHub Repository and Pushing Changes from Windows</h1>
+
+    <h2>Step 1: Install Git</h2>
+    <ol>
+        <li>
+            <strong>Download Git for Windows</strong>
+            <p>Visit <a href="https://gitforwindows.org/">Git for Windows</a> and download the installer.</p>
+        </li>
+        <li>
+            <strong>Run the Installer</strong>
+            <p>Follow the installation instructions and use the default settings.</p>
+        </li>
+    </ol>
+
+    <h2>Step 2: Create a GitHub Account</h2>
+    <ol>
+        <li>
+            <strong>Sign Up for GitHub</strong>
+            <p>Go to <a href="https://github.com/">GitHub</a> and sign up for a new account if you don't have one.</p>
+        </li>
+    </ol>
+
+    <h2>Step 3: Generate an SSH Key</h2>
+    <ol>
+        <li>
+            <strong>Open Git Bash</strong>
+            <p>Open Git Bash from the Start menu.</p>
+        </li>
+        <li>
+            <strong>Generate SSH Key</strong>
+            <pre><code>ssh-keygen -t ed25519 -C "your_email@example.com"</code></pre>
+            <p>Follow the prompts to save the key and set a passphrase.</p>
+        </li>
+        <li>
+            <strong>Add SSH Key to GitHub</strong>
+            <p>Copy the SSH key to your clipboard:</p>
+            <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+            <p>Go to <a href="https://github.com/settings/keys">GitHub SSH Keys Settings</a> and add a new SSH key by pasting the key.</p>
+        </li>
+    </ol>
+
+    <h2>Step 4: Create a New Repository on GitHub</h2>
+    <ol>
+        <li>
+            <strong>Create Repository</strong>
+            <p>Navigate to <a href="https://github.com/">GitHub</a> and create a new repository. Name it <code>deepseek-drag-drop</code>.</p>
+        </li>
+    </ol>
+
+    <h2>Step 5: Clone the Repository to Your Local Machine</h2>
+    <ol>
+        <li>
+            <strong>Clone the Repository</strong>
+            <pre><code>git clone git@github.com:jeff0926/deepseek-drag-drop.git
+cd deepseek-drag-drop</code></pre>
+        </li>
+    </ol>
+
+    <h2>Step 6: Make Code Changes and Push to GitHub</h2>
+    <ol>
+        <li>
+            <strong>Make Changes</strong>
+            <p>Add or modify files in the repository.</p>
+        </li>
+        <li>
+            <strong>Add and Commit Changes</strong>
+            <pre><code>git add .
+git commit -m "Initial commit"</code></pre>
+        </li>
+        <li>
+            <strong>Push Changes to GitHub</strong>
+            <pre><code>git push -u origin main</code></pre>
+        </li>
+    </ol>
+</body>
+</html>

@@ -1,4 +1,11 @@
 Flask==3.0.0
 python-dotenv==1.0.0
-openai==1.0.0
+openai>=1.59.6
 flask-cors==4.0.0
+dotenv
+PyPDF2
+nltk
+spacy
+python-docx
+PyPDF2
+

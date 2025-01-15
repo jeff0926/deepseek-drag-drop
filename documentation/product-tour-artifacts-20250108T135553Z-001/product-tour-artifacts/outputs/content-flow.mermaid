@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Author
+    participant Word
+    participant Adobe
+    participant CDN
+    participant Browser
+
+    Author->>Word: Edit content
+    Word->>Adobe: Preview content
+    Adobe->>Adobe: Generate plain HTML
+    Browser->>Adobe: Request content
+    Browser->>CDN: Load web component
+    CDN->>Browser: Return component code
+    Browser->>Adobe: Fetch HTML content
+    Adobe->>Browser: Return content
+    Browser->>Browser: Render tour

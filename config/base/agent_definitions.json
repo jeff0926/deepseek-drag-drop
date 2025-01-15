@@ -1,0 +1,139 @@
+{
+    "agents": [
+      {
+        "name": "Code Analysis Agent",
+        "description": "Analyzes code files for static issues, refactoring opportunities, and generates unit tests.",
+        "tasks": [
+          "Syntax highlighting",
+          "Code completion",
+          "Static analysis",
+          "Refactoring",
+          "Unit test generation"
+        ],
+        "supported_file_types": [
+          ".js", ".ts", ".jsx", ".tsx", ".py", ".java", ".go", ".rb", ".php", ".cs", ".rs", ".scala", ".kt", ".swift", ".c", ".cpp", ".h"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "Infrastructure-as-Code Agent",
+        "description": "Manages infrastructure resources and deployments using IaC tools.",
+        "tasks": [
+          "Terraform planning and application",
+          "Kubernetes deployment management",
+          "Docker container management",
+          "CloudFormation resource management",
+          "Bicep resource management"
+        ],
+        "supported_file_types": [
+          ".tf", ".tfvars", ".bicep", ".arm", ".cloudformation.yaml", "Dockerfile", "docker-compose.yml", ".dockerignore", "kubernetes.yaml", ".k8s.yaml", "helm.yaml", "values.yaml"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "Configuration Management Agent",
+        "description": "Validates and manages configuration files, resolving conflicts and ensuring consistency.",
+        "tasks": [
+          "Schema validation",
+          "Conflict detection",
+          "Configuration assistance"
+        ],
+        "supported_file_types": [
+          ".env", ".ini", ".conf", ".properties", ".xml", ".toml", ".yaml", ".yml", ".json"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "CI/CD Pipeline Agent",
+        "description": "Analyzes and optimizes CI/CD pipelines, assisting in troubleshooting and efficiency improvements.",
+        "tasks": [
+          "Pipeline visualization",
+          "Efficiency suggestions",
+          "Troubleshooting"
+        ],
+        "supported_file_types": [
+          ".gitlab-ci.yml", ".github/workflows/", "azure-pipelines.yml", ".travis.yml", ".circleci/config.yml", "Jenkinsfile"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "Project Management Agent",
+        "description": "Provides insights and improvements for project structure, health, and organization.",
+        "tasks": [
+          "Project structure analysis",
+          "Best practice suggestions",
+          "Project health reporting"
+        ],
+        "supported_file_types": [
+          ".gitignore", ".editorconfig", ".prettierrc", ".eslintrc", "tslint.json", "pylintrc"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "Web Development Agent",
+        "description": "Assists in web development by optimizing performance and debugging web applications.",
+        "tasks": [
+          "HTML, CSS, JavaScript assistance",
+          "Performance optimization",
+          "Debugging"
+        ],
+        "supported_file_types": [
+          ".html", ".css", ".scss", ".less", ".vue"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "Documentation Management Agent",
+        "description": "Organizes and improves documentation clarity, readability, and structure.",
+        "tasks": [
+          "Readability analysis",
+          "SEO optimization",
+          "Documentation generation"
+        ],
+        "supported_file_types": [
+          ".md", ".rst", ".txt", ".pdf"
+        ],
+        "ai_required": true
+      },
+      {
+        "name": "Data Analysis Agent",
+        "description": "Processes data files to provide insights, summaries, and visualization suggestions.",
+        "tasks": [
+          "Data processing",
+          "Statistical summaries",
+          "Visualization suggestions"
+        ],
+        "supported_file_types": [
+          ".csv", ".xlsx"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "Logging and Monitoring Agent",
+        "description": "Analyzes log files to detect patterns, errors, and improve logging practices.",
+        "tasks": [
+          "Pattern analysis",
+          "Error detection",
+          "Logging improvement"
+        ],
+        "supported_file_types": [
+          ".log"
+        ],
+        "ai_required": false
+      },
+      {
+        "name": "Graphing and Architecture Agent",
+        "description": "Generates and analyzes architecture diagrams and graphs.",
+        "tasks": [
+          "Diagram generation",
+          "Graph analysis",
+          "Architecture insights"
+        ],
+        "supported_file_types": [
+          ".mmd", ".drawio", ".vsdx", ".lucid", ".dot", ".puml"
+        ],
+        "ai_required": true
+      }
+    ]
+  }
+  

@@ -1,0 +1,23 @@
+deepseek-drag-drop/
+├── app/                   # Flask backend
+│   ├── __init__.py        # Flask app initialization
+│   ├── routes.py          # Flask routes (API endpoints)
+│   └── utils/             # Utility functions
+├── frontend/              # Frontend files
+│   ├── index.html         # Main HTML file
+│   ├── styles.css         # CSS file
+│   └── scripts.js         # JavaScript file
+├── templates/             # Templates for dynamic content
+│   ├── markdown_template.md
+│   ├── mermaid_template.md
+│   ├── matrix_template.md
+│   ├── technical_spec.docx
+│   └── presentation.pptx
+├── .env                   # Environment variables (in the root directory)
+├── requirements.txt       # Python dependencies
+├── run.py                 # Entry point to run the Flask app
+├── README.md              # Project documentation
+├── app_overview.md        # Detailed app documentation
+├── roadmap.md             # Development roadmap
+├── tests/                 # Test files
+└── example_files/         # Example files for testing

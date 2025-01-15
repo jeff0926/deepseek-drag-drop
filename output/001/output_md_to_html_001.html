@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Specification Presentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            margin-top: 1em;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .img-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Technical Specification Presentation</h1>
+
+<hr>
+
+<h2>1. High-Level System Architecture</h2>
+<p>The system architecture consists of the following components:</p>
+<ul>
+    <li><strong>Web Component (Product Tour)</strong>: A custom web component built using Web Components API.</li>
+    <li><strong>CDN (Akamai)</strong>: Hosts the static assets (JS, CSS, images) for the Product Tour.</li>
+    <li><strong>GitHub Actions</strong>: Automates the CI/CD pipeline for releasing and publishing assets.</li>
+    <li><strong>Analytics (Adobe Analytics)</strong>: Tracks user interactions and events.</li>
+    <li><strong>Host Application</strong>: Embeds the Product Tour web component.</li>
+</ul>
+<div class="img-container">
+    <img src="Screenshot 2025-01-11 012526.jpg" alt="High-Level System Architecture">
+</div>
+
+<hr>
+
+<h2>2. Application Architecture</h2>
+<p>The Product Tour web component is built using the following structure:</p>
+<ul>
+    <li><strong>Shadow DOM</strong>: Encapsulates styles and markup.</li>
+    <li><strong>Custom Elements</strong>: Defines the <code>product-tour</code> element.</li>
+    <li><strong>Event System</strong>: Dispatches custom events for user interactions.</li>
+    <li><strong>Dynamic Content Loading</strong>: Fetches and renders content dynamically.</li>
+</ul>
+<div class="img-container">
+    <img src="Screenshot 2025-01-11 012439.jpg" alt="Application Architecture">
+</div>
+
+<hr>
+
+<h2>3. CI/CD Pipeline</h2>
+<p>The CI/CD pipeline is powered by GitHub Actions and includes the following steps:</p>
+<ol>
+    <li><strong>Development & Testing</strong>: Developers complete development and testing.</li>
+    <li><strong>Release Creation</strong>: A new release is created on GitHub with semantic versioning.</li>
+    <li><strong>Asset Publishing</strong>: GitHub Actions publishes assets to the Akamai CDN.</li>
+    <li><strong>Cache Purge</strong>: The CDN cache is purged to ensure the latest assets are served.</li>
+</ol>
+<div class="img-container">
+    <img src="Screenshot 2025-01-11 012130.jpg" alt="CI/CD Pipeline">
+</div>
+
+<hr>
+
+<h2>4. Versioning</h2>
+<ul>
+    <li><strong>Semantic Versioning</strong>: Releases follow the <code>vX.Y.Z</code> format (e.g., <code>v1.0.2</code>).</li>
+    <li><strong>Versioned URLs</strong>: Assets are served from versioned paths (e.g., <code>https://cdn.udex.services.sap.com/dxf/v1.0.2/product-tour/product-tour.js</code>).</li>
+    <li><strong>Latest Version</strong>: A <code>latest</code> alias is maintained for the most recent release (e.g., <code>https://cdn.udex.services.sap.com/dxf/latest/product-tour/product-tour.js</code>).</li>
+</ul>
+
+<hr>
+
+<h2>5. Analytics Integration</h2>
+<p>The Product Tour integrates with Adobe Analytics for tracking user interactions. Key features include:</p>
+<ul>
+    <li><strong>Custom Events</strong>: Events like <code>tourStarted</code>, <code>imageLoaded</code>, and <code>accordionHeaderClicked</code> are dispatched.</li>
+    <li><strong>Data Layer</strong>: Event data is populated in the Adobe Analytics data layer.</li>
+    <li><strong>Link Tracking</strong>: Interactive elements include <code>data-analytics-aa</code> attributes for tracking.</li>
+</ul>
+<div class="img-container">
+    <img src="path_to_diagram_image_4.png" alt="Analytics Integration">
+</div>
+
+<hr>
+
+<h2>6. Event System</h2>
+<p>The event system is designed to:</p>
+<ul>
+    <li><strong>Bubble Events</strong>: Custom events bubble up to the host application.</li>
+    <li><strong>Cross Shadow DOM Boundaries</strong>: Events use the <code>composed: true</code> flag to cross shadow DOM boundaries.</li>
+    <li><strong>Logging</strong>: Events are logged for debugging in development mode.</li>
+</ul>
+<div class="img-container">
+    <img src="path_to_diagram_image_5.png" alt="Event System">
+</div>
+
+<hr>
+
+<h2>7. Key Technical Requirements</h2>
+<ol>
+    <li><strong>Event Bubbling</strong>: Ensure events bubble up to the host application.</li>
+    <li><strong>Adobe Analytics Integration</strong>: Populate the data layer with event details.</li>
+    <li><strong>Performance Optimization</strong>: Use passive event listeners and minimize payload size.</li>
+    <li><strong>Cross-Browser Compatibility</strong>: Support all major browsers with polyfills if necessary.</li>
+    <li><strong>Logging</strong>: Log events in development mode for debugging.</li>
+</ol>
+
+<hr>
+
+<h2>8. Integration Touchpoints</h2>
+<ul>
+    <li><strong>Host Application</strong>: Embeds the Product Tour web component.</li>
+    <li><strong>CDN</strong>: Serves static assets.</li>
+    <li><strong>GitHub Actions</strong>: Automates the release and publishing process.</li>
+    <li><strong>Adobe Analytics</strong>: Tracks user interactions.</li>
+</ul>
+<div class="img-container">
+    <img src="path_to_diagram_image_6.png" alt="Integration Touchpoints">
+</div>
+
+<hr>
+
+<h2>9. GitHub Actions Workflow</h2>
+<p>The GitHub Actions workflow (<code>publish.yaml</code>) includes:</p>
+<ol>
+    <li><strong>Checkout Code</strong>: Pulls the latest code from the repository.</li>
+    <li><strong>Prepare Environment</strong>: Sets up the environment variables.</li>
+    <li><strong>Upload to Akamai</strong>: Uploads assets to Akamai NetStorage.</li>
+    <li><strong>Purge Cache</strong>: Purges the CDN cache to serve the latest assets.</li>
+</ol>
+<div class="img-container">
+    <img src="path_to_diagram_image_7.png" alt="GitHub Actions Workflow">
+</div>
+
+<hr>
+
+<h2>10. Future Enhancements</h2>
+<ul>
+    <li><strong>Standardized Event System</strong>: Develop a standardized approach for event dispatch and capture across web components.</li>
+    <li><strong>Performance Optimization</strong>: Implement debouncing for frequent events.</li>
+    <li><strong>Cross-Browser Testing</strong>: Ensure compatibility with older browsers using polyfills.</li>
+    <li><strong>Documentation</strong>: Create comprehensive documentation for developers integrating the web component.</li>
+</ul>
+
+<hr>
+
+<p>This presentation provides a high-level overview of the system and application architecture, CI/CD pipeline, analytics integration, and key technical requirements. Let me know if you need further details or additional diagrams!</p>
+
+</body>
+</html>

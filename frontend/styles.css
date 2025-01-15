@@ -1,35 +1,419 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.6;
+    background-color: #121212; /* Default dark theme */
+    color: #e0e0e0;
+}
+
+body.light-theme {
+    background-color: #f5f5f5;
+    color: #333333;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 8px;
+    font-size: 14px;
+    color: inherit;
+}
+
+.toggle-ball {
+    width: 40px;
+    height: 20px;
+    background-color: #444;
+    border-radius: 10px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-ball::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+#themeToggle:checked + .toggle-label .toggle-ball {
+    background-color: #3498db;
+}
+
+#themeToggle:checked + .toggle-label .toggle-ball::before {
+    transform: translateX(20px);
+}
+
+/* Main Container */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+/* Section Containers */
+.section-container {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+body.light-theme .section-container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropzone */
 .dropzone {
     height: 200px;
-    border: 2px dashed #ccc;
-    border-radius: 4px;
+    border: 2px dashed #555;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.status-area {
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.dropzone.dragover {
+    border-color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+body.light-theme .dropzone {
+    border-color: #ccc;
+    color: #666;
+}
+
+/* File Cards */
+.file-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.file-card {
+    width: 200px;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+}
+
+.file-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+body.light-theme .file-card {
+    background-color: #ffffff;
+    border-color: #ddd;
+}
+
+/* File Metadata */
+.file-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.file-size, .file-type, .file-modified {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+body.light-theme .file-size, 
+body.light-theme .file-type, 
+body.light-theme .file-modified {
+    color: #666;
+}
+
+/* File Actions */
+.file-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.select-checkbox {
+    cursor: pointer;
+}
+
+.remove-icon {
+    cursor: pointer;
+    color: #ff6b6b;
+    transition: color 0.3s ease;
+}
+
+.remove-icon:hover {
+    color: #ff3b3b;
+}
+
+/* Report Cards */
+.report-cards {
+    display: flex;
+    gap: 10px;
+}
+
+.report-card {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #444;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.report-card:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: translateY(-3px);
+}
+
+body.light-theme .report-card {
+    background-color: #ffffff;
+    border-color: #ddd;
+}
+
+/* Prompt Area */
+.prompt-area textarea {
+    width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
-    max-height: 150px;
-    overflow-y: auto;
+    border: 1px solid #444;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: inherit;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.results {
-    border: 1px solid #ccc;
-    border-radius: 4px;
+body.light-theme .prompt-area textarea {
+    background-color: #ffffff;
+    border-color: #ddd;
+}
+
+/* Results and Payload Area */
+.results, .payload-area {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
     padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+body.light-theme .results, 
+body.light-theme .payload-area {
+    background-color: #ffffff;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3498db;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #2980b9;
+}
+
+.button-group button#cleanButton {
+    background-color: #2ecc71;
+}
+
+.button-group button#cleanButton:hover {
+    background-color: #27ae60;
+}
+
+/* Cleaning Controls */
+.cleaning-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cleaning-levels {
+    display: flex;
+    gap: 10px;
+}
+
+.cleaning-level-button, .clean-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3498db;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cleaning-level-button:hover, .clean-button:hover {
+    background-color: #2980b9;
+}
+
+.clean-button {
+    flex: 1; /* Make the clean button the longest rectangle */
+    background-color: #2ecc71;
+}
+
+.clean-button:hover {
+    background-color: #27ae60;
+}
+/* Cleaning Metrics */
+.cleaning-metrics {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cleaning-metrics h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #3498db;
+}
+
+.cleaning-metrics p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+body.light-theme .cleaning-metrics {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+body.light-theme .cleaning-metrics p {
+    color: #333333;
+}
+.role-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.role-card {
+    width: 300px;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #1e1e1e;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    text-align: center;
+}
+
+.role-card:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    transform: translateY(-5px);
+}
+
+.role-card h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #4caf50;
+}
+
+.role-card p {
+    font-size: 14px;
+    color: #ccc;
+}
+.selectable-card {
+    width: 300px;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #1e1e1e;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    text-align: center;
+}
+
+.selectable-card:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    transform: translateY(-5px);
+}
+
+.selectable-card.selected {
+    background-color: #27ae60;
+    color: white;
+    border-color: #2ecc71;
+}
+
+.selectable-card h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #4caf50;
+}
+
+.selectable-card p {
+    font-size: 14px;
+    color: #ccc;
 }

@@ -1,0 +1,80 @@
+CHAR_LIMITS = {
+    ".md": 1000,  # Markdown files often contain high-level documentation.
+    ".txt": 500,  # Plain text files are unstructured but concise.
+    ".py": 300,  # Python files; include docstrings or comments.
+    ".log": 200,  # Log files; focus on the initial log lines.
+    ".js": 300,  # JavaScript files; extract initial comments or structure.
+    ".json": 200,  # JSON files; avoid excessive content.
+    ".yaml": 300,  # YAML files for configs; focus on key sections.
+    ".yml": 300,  # Same as `.yaml`.
+    ".ini": 200,  # INI configuration files.
+    ".conf": 200,  # General configuration files.
+    ".properties": 200,  # Properties files; concise by nature.
+    ".xml": 300,  # XML files often contain hierarchical data.
+    ".html": 500,  # HTML files; focus on meta or header information.
+    ".css": 300,  # CSS files; relevant for stylesheets.
+    ".scss": 300,  # SASS stylesheets.
+    ".less": 300,  # LESS stylesheets.
+    ".go": 300,  # Go programming files; include comments or structure.
+    ".rb": 300,  # Ruby files; similar to `.py` for docstrings.
+    ".java": 300,  # Java files; comments and method definitions.
+    ".kt": 300,  # Kotlin files; similar to `.java`.
+    ".swift": 300,  # Swift files; include high-level comments.
+    ".php": 300,  # PHP files; initial comments or structure.
+    ".cs": 300,  # C# files; structured comments.
+    ".cpp": 300,  # C++ files; inline comments or headers.
+    ".c": 300,  # C files; comments or method headers.
+    ".h": 300,  # Header files for C/C++; limited relevance.
+    ".rs": 300,  # Rust files; include doc comments.
+    ".scala": 300,  # Scala files; focus on class comments.
+    ".dart": 300,  # Dart files; comments or structure.
+    ".tf": 500,  # Terraform files; often concise configs.
+    ".tfvars": 300,  # Terraform variables.
+    ".dockerignore": 300,  # Docker ignore files; concise patterns.
+    "Dockerfile": 300,  # Docker build files.
+    ".gitignore": 300,  # Git ignore files; concise patterns.
+    ".editorconfig": 300,  # Editor configuration files.
+    ".rst": 1000,  # ReStructuredText for docs; similar to `.md`.
+    ".readme": 1000,  # README files; high-level context.
+    ".pdf": 0,  # PDFs should not extract text in this workflow.
+    ".csv": 200,  # CSV files; header or initial rows.
+    ".xlsx": 200,  # Excel files; avoid bloat with large data.
+    ".mmd": 500,  # Mermaid diagrams; key chart info.
+    ".dot": 500,  # Graphviz DOT files.
+    ".puml": 500,  # PlantUML diagrams.
+    ".drawio": 500,  # Diagrams; structured.
+    ".lucid": 500,  # LucidChart diagrams.
+    ".pem": 100,  # Certificate files; avoid sensitive content.
+    ".xsd": 300,  # XML Schema Definitions.
+    ".sql": 300,  # SQL files; focus on query definitions.
+    ".bat": 200,  # Batch files; concise commands.
+    ".sh": 300,  # Shell scripts; comments or commands.
+    ".travis.yml": 300,  # CI/CD config.
+    "Jenkinsfile": 300,  # CI/CD config.
+    ".github/workflows/": 300,  # GitHub Actions workflows.
+    ".prettierrc": 200,  # Prettier configurations.
+    ".cloudformation.yaml": 300,  # AWS infra as code.
+    "docker-compose.yml": 300,  # Docker-compose files.
+    ".k8s.yaml": 300,  # Kubernetes manifests.
+    "kubernetes.yaml": 300,  # Kubernetes manifests.
+    "azure-pipelines.yml": 300,  # Azure CI/CD config.
+    ".vsdx": 300,  # Visio diagrams.
+    ".bicep": 300,  # Azure infra as code.
+    ".eslintrc": 300,  # Linter configurations.
+    "values.yaml": 300,  # Helm values.
+    ".env": 200,  # Environment variables.
+    ".arm": 300,  # ARM templates.
+    ".gitlab-ci.yml": 300,  # GitLab CI/CD config.
+    ".circleci/config.yml": 300,  # CircleCI config.
+    "helm.yaml": 300,  # Helm templates.
+    ".log": 200,  # Logs.
+    ".sample": 200,  # Sample files for templates.
+    ".idx": 100,  # Index files; limited value.
+    ".svg": 100,  # SVG images; metadata focus.
+    ".jpg": 0,  # Binary files; no text extraction.
+    ".png": 0,  # Binary files; no text extraction.
+    ".ico": 0,  # Icon files.
+    ".pack": 0,  # Pack files; binary.
+    ".psd": 0,  # Photoshop files; binary.
+    ".ai": 0,  # Adobe Illustrator files; binary.
+}

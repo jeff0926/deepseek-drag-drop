@@ -1,0 +1,31 @@
+graph LR
+    subgraph "Content Creation"
+        A1[Word Document]
+        A2[HTML Content]
+        A3[Media Assets]
+    end
+
+    subgraph "Processing"
+        B1[Parse HTML]
+        B2[Extract Config]
+        B3[Build UI Model]
+    end
+
+    subgraph "Runtime"
+        C1[DOM Events]
+        C2[User Interface]
+        C3[Analytics]
+    end
+
+    A1 -->|Transform| A2
+    A2 -->|Feed| B1
+    A3 -->|Reference| B1
+    B1 -->|Generate| B2
+    B2 -->|Configure| B3
+    B3 -->|Render| C2
+    C2 -->|Trigger| C1
+    C1 -->|Track| C3
+
+style A2 fill:#f9f,stroke:#333
+style B2 fill:#ff9,stroke:#333
+style C2 fill:#9f9,stroke:#333

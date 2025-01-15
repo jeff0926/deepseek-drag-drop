@@ -1,0 +1,31 @@
+graph TD
+    subgraph "Content Management"
+        A[SharePoint Word Doc]
+        B[Adobe EDS]
+        C[Plain HTML Content]
+    end
+
+    subgraph "Delivery Infrastructure"
+        D[UDEx CDN]
+        E[Product Tour JS]
+        F[Version Control]
+    end
+
+    subgraph "Client Runtime"
+        G[Web Component]
+        H[Shadow DOM]
+        I[Event System]
+    end
+
+    A -->|Preview| B
+    B -->|Generate| C
+    D -->|Serve| E
+    E -->|Version| F
+    G -->|Create| H
+    G -->|Emit| I
+    C -->|Feed| G
+    E -->|Initialize| G
+
+style G fill:#f96,stroke:#333
+style C fill:#9cf,stroke:#333
+style E fill:#9fc,stroke:#333

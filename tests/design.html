@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Admin</title>
+ <style>
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #121212; /* Default dark theme */
+  color: #e0e0e0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+  background-color: #f5f5f5;
+  color: #333333;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+  font-size: 14px;
+  color: inherit;
+}
+
+.toggle-ball {
+  width: 40px;
+  height: 20px;
+  background-color: #444;
+  border-radius: 10px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-ball::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+}
+
+#themeToggle:checked + .toggle-label .toggle-ball {
+  background-color: #3498db;
+}
+
+#themeToggle:checked + .toggle-label .toggle-ball::before {
+  transform: translateX(20px);
+}
+
+/* Main Container */
+.main-container {
+  display: grid;
+  grid-template-columns: 200px 1fr; 
+  min-height: 100vh; 
+}
+
+/* Top Bar */
+.top-bar {
+  background-color: #222;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Left Sidebar */
+.left-sidebar {
+  background-color: #181818;
+  padding: 20px;
+}
+
+.left-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.left-sidebar ul li {
+  margin-bottom: 15px;
+}
+
+.left-sidebar ul li a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.left-sidebar ul li a:hover {
+  background-color: #2c2c2c;
+}
+
+/* Main Content */
+.main-content {
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.col-md-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.col-md-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Card */
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Chart */
+#siteAnalysisChart {
+  width: 100%;
+  height: 200px;
+}
+
+/* Chat List */
+.chat-list {
+  list-style: none;
+  padding: 0;
+}
+
+.chat-list li {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-user {
+  display: flex;
+  align-items: center;
+}
+
+.chat-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Post List */
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-list li i {
+  margin-right: 10px;
+  color: #3498db;
+}
+
+/* Responsive Design (Basic) */
+@media (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Add more styles as needed (e.g., for buttons, inputs, etc.) */
+</style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="dark-theme">
+  <div class="theme-toggle">
+    <input type="checkbox" id="themeToggle">
+    <label for="themeToggle" class="toggle-label">
+      <i class="fas fa-sun"></i>
+      <i class="fas fa-moon"></i>
+      <span class="toggle-ball"></span>
+    </label>
+  </div>
+
+  <div class="main-container">
+    <div class="top-bar">
+      <div class="logo">Matrix Admin</div>
+      <div class="user-info">
+        <span>John Doe</span>
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+
+    <div class="left-sidebar">
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Widgets</a></li>
+        <li><a href="#">Charts</a></li>
+        <li><a href="#">Tables</a></li>
+        <li><a href="#">Forms</a></li>
+        <li><a href="#">Buttons</a></li>
+        <li><a href="#">Icons</a></li>
+        <li><a href="#">Elements</a></li>
+        <li><a href="#">Addons</a></li>
+        <li><a href="#">Authentication</a></li>
+        <li><a href="#">Errors</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              Dashboard
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              Widgets
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              Charts
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-header">
+              Tables
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              Site Analysis
+            </div>
+            <div class="card-body">
+              <canvas id="siteAnalysisChart"></canvas> 
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              Chat Options
+            </div>
+            <div class="card-body">
+              <ul class="chat-list">
+                <li>
+                  <div class="chat-user">
+                    <img src="user1.jpg" alt="User 1">
+                    <span>James Anderson</span>
+                  </div>
+                  <p>Lorem Ipsum is simply dummy text of the printing and type setting industry.</p>
+                </li>
+                <li>
+                  <div class="chat-user">
+                    <img src="user2.jpg" alt="User 2">
+                    <span>Bianca Doe</span>
+                  </div>
+                  <p>It's Great opportunity to work.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              Latest Posts
+            </div>
+            <div class="card-body">
+              <ul class="post-list">
+                <li>
+                  <i class="fas fa-lightbulb"></i>
+                  <span>James Anderson</span>
+                  <p>Lorem Ipsum is simply dummy text of the printing and type setting industry.</p>
+                </li>
+                <li>
+                  <i class="fas fa-user"></i>
+                  <span>Michael Jordan</span>
+                  <p>Lorem Ipsum is simply dummy text of the printing and type setting industry.</p>
+                </li>
+                <li>
+                  <i class="fas fa-globe"></i>
+                  <span>Abraham Doething</span>
+                  <p>Lorem Ipsum is simply dummy text of the printing and type setting industry.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

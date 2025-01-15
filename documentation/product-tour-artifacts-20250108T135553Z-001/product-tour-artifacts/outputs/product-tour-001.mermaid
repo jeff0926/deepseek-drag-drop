@@ -1,0 +1,55 @@
+flowchart TB
+    %% Subgraphs for architectural layers %%
+    subgraph GitHub["GitHub Repository"]
+        MainJS["Web Component Source Code"]
+        Actions["GitHub Actions (CI/CD)"]
+    end
+
+    subgraph SharePoint["SharePoint"]
+        WordDoc["Content Authoring (MS Word)"]
+        HelixPub["Adobe Helix Publisher"]
+    end
+
+    subgraph AdobeEDS["Adobe Edge Delivery Server"]
+        HTMLContent["Published HTML Content"]
+        PublishedJS["Published Component JS"]
+    end
+
+    subgraph HostApp["Host Web Application"]
+        WebComponent["Web Component Instance"]
+        EventListeners["Global Event Listeners"]
+        AdaptorLayer["Adaptor Layer"]
+        AnalyticsService["Adobe Analytics"]
+    end
+
+    %% Process Flows %%
+    WordDoc -->|"Author Content"| HelixPub
+    HelixPub -->|"Generate HTML"| HTMLContent
+    MainJS -->|"Commit Code"| Actions
+    Actions -->|"Build & Deploy"| PublishedJS
+    WebComponent -->|"Fetch HTML"| HTMLContent
+    WebComponent -->|"Load JS"| PublishedJS
+    WebComponent -->|"Dispatch Events"| EventListeners
+    EventListeners -->|"Transform Events"| AdaptorLayer
+    AdaptorLayer -->|"Forward to Analytics"| AnalyticsService
+
+    %% Event Propagation Swimlane %%
+    subgraph Events["Event Propagation Process"]
+        User["User Interaction"] --> WebComponent
+        WebComponent -->|"Custom Event Dispatch"| EventListeners
+        EventListeners -->|"Bubble Events"| AdaptorLayer
+        AdaptorLayer -->|"Log & Track"| AnalyticsService
+    end
+
+    %% Styling the nodes %%
+    classDef repository fill:#f6f8fa,stroke:#333,stroke-width:2px
+    classDef delivery fill:#fa0f00,color:#fff,stroke:#333
+    classDef sharepoint fill:#0078d4,color:#fff,stroke:#333
+    classDef hostapp fill:#4CAF50,color:#fff,stroke:#333
+    classDef events fill:#FFD700,color:#333,stroke:#333
+
+    class GitHub repository
+    class AdobeEDS delivery
+    class SharePoint sharepoint
+    class HostApp hostapp
+    class Events events

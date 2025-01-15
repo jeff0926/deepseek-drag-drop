@@ -1,0 +1,99 @@
+{
+    "levels": [
+      {
+        "level": 1,
+        "name": "Basic Analysis",
+        "description": "Covers static analysis and basic documentation readiness.",
+        "readiness_criteria": {
+          "file_type_coverage": 50,
+          "critical_agents_ready": true,
+          "ai_enabled": false
+        },
+        "required_agents": ["Code Analysis Agent", "Documentation Management Agent"],
+        "file_types_required": [".js", ".py", ".md"],
+        "outputs": ["Static Analysis Report", "File Type Coverage Metrics"],
+        "ai_required": false,
+        "tasks": [
+          {
+            "task_name": "Static Analysis",
+            "dependencies": ["Code Analysis Agent", ".js", ".py"],
+            "outputs": ["Syntax Errors", "Code Quality Metrics"]
+          },
+          {
+            "task_name": "File Type Coverage",
+            "dependencies": ["Documentation Management Agent", ".md"],
+            "outputs": ["File Type Coverage Metrics"]
+          }
+        ],
+        "agent_specific_execution": {
+          "Code Analysis Agent": {
+            "coverage_required": 50,
+            "tasks": ["Static Analysis"],
+            "outputs": ["Syntax Errors", "Code Quality Metrics"]
+          }
+        }
+      },
+      {
+        "level": 2,
+        "name": "Intermediate Documentation",
+        "description": "Generates detailed documentation and intermediate analytics.",
+        "readiness_criteria": {
+          "file_type_coverage": 70,
+          "critical_agents_ready": true,
+          "ai_enabled": true
+        },
+        "required_agents": ["Documentation Management Agent"],
+        "file_types_required": [".md", ".rst"],
+        "outputs": ["Readability Metrics", "Markdown Documentation"],
+        "ai_required": true,
+        "tasks": [
+          {
+            "task_name": "Generate Documentation",
+            "dependencies": ["Documentation Management Agent", ".md"],
+            "outputs": ["Markdown Documentation", "Readability Metrics"]
+          }
+        ],
+        "agent_specific_execution": {
+          "Documentation Management Agent": {
+            "coverage_required": 60,
+            "tasks": ["Generate Documentation"],
+            "outputs": ["Markdown Documentation", "Readability Metrics"]
+          }
+        }
+      },
+      {
+        "level": 3,
+        "name": "Advanced Infrastructure Planning",
+        "description": "Focuses on architecture diagrams and infrastructure validation.",
+        "readiness_criteria": {
+          "file_type_coverage": 80,
+          "critical_agents_ready": true,
+          "ai_enabled": true
+        },
+        "required_agents": ["Infrastructure-as-Code Agent", "Graphing and Architecture Agent"],
+        "file_types_required": [".tf", ".mmd"],
+        "outputs": ["Terraform Plan", "Architecture Diagrams"],
+        "ai_required": true,
+        "tasks": [
+          {
+            "task_name": "Terraform Validation",
+            "dependencies": ["Infrastructure-as-Code Agent", ".tf"],
+            "outputs": ["Terraform Plan"]
+          },
+          {
+            "task_name": "Generate Architecture Diagram",
+            "dependencies": ["Graphing and Architecture Agent", ".mmd"],
+            "outputs": ["Architecture Diagrams"]
+          }
+        ],
+        "agent_specific_execution": {
+          "Graphing and Architecture Agent": {
+            "coverage_required": 75,
+            "tasks": ["Generate Architecture Diagram"],
+            "outputs": ["Architecture Diagrams"]
+          }
+        }
+      }
+    ]
+  }
+  

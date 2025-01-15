@@ -1,17 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeepSeek Drag-and-Drop</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <div class="container">
-        <div class="dropzone" id="dropzone">Drop files here</div>
-        <div class="status-area" id="statusArea"></div>
-        <div class="results" id="results"></div>
+
+<body class="dark-theme">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <input type="checkbox" id="themeToggle">
+        <label for="themeToggle" class="toggle-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span class="toggle-ball"></span>
+        </label>
     </div>
-    <script src="scripts.js"></script>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Dropzone Section -->
+        <div class="section-container">
+            <div class="dropzone" id="dropzone">Drop files here (max 10)</div>
+        </div>
+
+        <!-- Status Area Section -->
+        <div class="section-container">
+            <div class="status-area" id="statusArea">
+                <h3>Status Logs:</h3>
+                <div id="statusLogs"></div>
+            </div>
+        </div>
+
+        <!-- File Cards Section -->
+        <div class="section-container">
+            <div class="file-cards" id="fileCards"></div>
+        </div>
+        <!-- Role Selection Section -->
+        <div class="section-container">
+            <h3>Select a Role:</h3>
+            <div class="role-cards" id="roleCards">
+                <!-- Dynamic content will populate here -->
+            </div>
+        </div>
+
+        <!-- Report Type Section -->
+        <div class="section-container">
+            <div class="report-type-area">
+                <h3>Select Report Type:</h3>
+                <div class="report-cards">
+                    <div class="report-card">
+                        <input type="radio" id="level1" name="reportType" value="Level 1 Report">
+                        <label for="level1">Level 1 Report</label>
+                    </div>
+                    <div class="report-card">
+                        <input type="radio" id="level2" name="reportType" value="Level 2 Report">
+                        <label for="level2">Level 2 Report</label>
+                    </div>
+                    <div class="report-card">
+                        <input type="radio" id="level3" name="reportType" value="Level 3 Report">
+                        <label for="level3">Level 3 Report</label>
+                    </div>
+                    <div class="report-card">
+                        <input type="radio" id="arbPackage" name="reportType" value="ARB Package">
+                        <label for="arbPackage">ARB Package</label>
+                    </div>
+                    <div class="report-card">
+                        <input type="radio" id="arbPackage" name="reportType" value="ARB Package">
+                        <label for="arbPackage">readme to arb template</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Report Type Section -->
+        <div class="section-container">
+            <div class="report-type-area">
+                <h3>Select Graph Type:</h3>
+                <input type="checkbox" id="createImage" name="createImage" value="Create Image"> Create Image(s)
+                <div class="report-cards">
+                    <div class="report-card">
+                        <input type="radio" id="level1" name="reportType" value="Mermaid">
+                        <label for="level1">Mermaid"</label>
+                    </div>
+                    <div class="report-card">
+                        <input type="radio" id="level2" name="reportType" value="Plant UML">
+                        <label for="level2">Plant UML</label>
+                    </div>
+                    <div class="report-card">
+                        <input type="radio" id="level3" name="reportType" value="Lucidchart">
+                        <label for="level3">Lucidchart</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prompt Area Section -->
+        <div class="prompt-area">
+            <label for="systemPrompt">System Prompt:</label>
+            <textarea id="systemPrompt" rows="2"></textarea>
+            <label for="userPrompt">User Prompt:</label>
+            <textarea id="userPrompt" rows="2"></textarea>
+            <div class="cleaning-controls">
+                <div class="cleaning-levels">
+                    <button id="lightClean" class="cleaning-level-button">Light</button>
+                    <button id="mediumClean" class="cleaning-level-button">Medium</button>
+                    <button id="heavyClean" class="cleaning-level-button">Heavy</button>
+                </div>
+                <button id="cleanButton" class="clean-button">Clean Me</button>
+                <button id="sendToLLM" class="clean-button">sendToLLM</button>
+            </div>
+            <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <span>Processing...</span>
+            </div>
+            <!-- Add this inside the Prompt Area Section -->
+            <div class="cleaning-metrics">
+                <h3>Cleaning Metrics:</h3>
+                <p><strong>Words Saved:</strong> <span id="wordsSaved">0</span></p>
+                <p><strong>Characters Saved:</strong> <span id="charsSaved">0</span></p>
+                <p><strong>Tokens Saved:</strong> <span id="tokensSaved">0</span></p>
+            </div>
+        </div>
+        <!-- Results Section -->
+        <div class="section-container">
+            <div class="results" id="results">
+                <h3>LLM Response:</h3>
+                <p id="llmResponse"></p>
+            </div>
+        </div>
+
+        <!-- Payload Area Section -->
+        <div class="section-container">
+            <div class="payload-area" id="payloadArea">
+                <h3>Payload Sent to API:</h3>
+                <pre id="payload"></pre>
+                <p><strong>Word Count:</strong> <span id="wordCount">0</span></p>
+                <p><strong>Token Count:</strong> <span id="tokenCount">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
+<div>
+    {system} you are a technical ambassador who ng technical who is gifted at describing technical topics in a manner
+    everyone can understand
+    <br>
+    {user} please review these documents and create a presentation, technical specification as well as multiple mermaid
+    grahs showing the high level system and application architectre as well as analytics cdn , git actions and
+    versioning
+</div>
+
 </html>

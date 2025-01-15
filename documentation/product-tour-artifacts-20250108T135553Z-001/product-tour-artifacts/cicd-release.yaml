@@ -1,0 +1,63 @@
+name: publish release to CDN
+
+on:
+  release:
+    types: [published]
+concurrency:
+  group: publishing
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: [self-hosted, solinas]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare env
+        id: prepare-env
+        run: |
+          echo "SOURCE_DIR=akamai" >> $GITHUB_ENV
+          echo "RELEASE_NAME=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+      - name: Prepare Akamai upload content
+        id: prepare-akamai-upload-content
+        run: |
+          versioned_dir=${{ env.SOURCE_DIR }}/${{ env.RELEASE_NAME }}
+          mkdir -pv $versioned_dir
+
+          # This must be a relative symlink in order to work after rsyning it
+          ln -sfv ./${{ env.RELEASE_NAME }} ${{ env.SOURCE_DIR }}/latest
+
+          for fragment in product-tour; do
+            fragment_dir=$versioned_dir/$fragment
+            mkdir -p $fragment_dir
+
+            cp -av $fragment/$fragment.js $fragment_dir/
+            cp -av $fragment/$fragment-event.js $fragment_dir/
+
+          done
+
+      # Result will be:
+      # - <cdn>/dxf/<release-version>/product-tour/prodcut-tour.js
+      # - <cdn>/dxf/<release-version>/product-tour/prodcut-tour-event.js
+      # - <cdn>/dxf/latest -> <cdn>/dxf/<release-version>
+
+      - name: Upload to Akamai Netstorage
+        uses: sapudex/actions/akamai/netstorage-upload@v1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY_AKAMAI_UPLOAD }}
+          source-directory: ${{ env.SOURCE_DIR }}/
+          namespace: ${{ vars.CDN_NAMESPACE }}
+
+      - name: Purge Cache
+        uses: sapudex/actions/akamai/purge-cache-by-tag@v1
+        with:
+          cache-tag: ${{ vars.CDN_CACHE_TAG }}
+          akamai-ccu-host: ${{ secrets.AKAMAI_CCU_HOST }}
+          akamai-ccu-client-token: ${{ secrets.AKAMAI_CCU_CLIENT_TOKEN }}
+          akamai-ccu-client-secret: ${{ secrets.AKAMAI_CCU_CLIENT_SECRET }}
+          akamai-ccu-access-token: ${{ secrets.AKAMAI_CCU_ACCESS_TOKEN }}

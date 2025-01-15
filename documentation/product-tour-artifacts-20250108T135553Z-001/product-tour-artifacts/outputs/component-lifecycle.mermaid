@@ -1,0 +1,17 @@
+stateDiagram-v2
+    [*] --> Initialize: Constructor
+    Initialize --> FetchContent: Connected
+    FetchContent --> ParseContent: HTML Received
+    ParseContent --> BuildUI: Config Created
+    BuildUI --> Ready: UI Rendered
+    Ready --> UpdateContent: New Content
+    Ready --> UpdateState: User Interaction
+    UpdateState --> Ready: State Updated
+    UpdateContent --> ParseContent: New HTML
+    Ready --> [*]: Disconnected
+
+    state Ready {
+        [*] --> Idle
+        Idle --> Processing: User Action
+        Processing --> Idle: Complete
+    }

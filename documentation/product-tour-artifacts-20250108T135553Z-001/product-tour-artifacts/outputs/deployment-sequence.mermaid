@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Dev as Developer
+    participant GH as GitHub
+    participant Action as GH Action
+    participant Akamai as Akamai NetStorage
+    participant CDN as CDN Edge
+
+    Dev->>GH: Create Release
+    GH->>Action: Trigger workflow
+    Action->>Action: Prepare environment
+    Action->>Action: Create version directories
+    Action->>Action: Copy fragment files
+    Action->>Action: Create symlinks
+    Action->>Akamai: Upload assets
+    Action->>CDN: Purge cache by tag
+    CDN-->>Dev: Assets available

@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant Page as Web Page
+    participant WC as Product Tour
+    participant Shadow as Shadow DOM
+    participant Adobe as Adobe EDS
+    participant Events as Event System
+
+    Page->>WC: Initialize
+    WC->>Shadow: Create Shadow Root
+    WC->>WC: Initialize Attributes
+    WC->>Adobe: Fetch HTML Content
+    Adobe-->>WC: Return Content
+    WC->>WC: Parse Markup
+    WC->>WC: Build Config Object
+    WC->>Shadow: Build Tour UI
+    WC->>Events: Setup Event Listeners
+    WC->>Events: Emit tourStarted
+    
+    Note over WC,Events: User Interaction Events
+    WC->>Events: accordionHeaderClicked
+    WC->>Events: carouselPrevClicked
+    WC->>Events: carouselNextClicked
+    WC->>Events: imageLoaded
