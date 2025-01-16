@@ -95,15 +95,85 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     
-        // Display role cards
-        function displayRoleCards(roles) {
-            roleCardsContainer.innerHTML = "";
-            roles.forEach((role) => {
-                const card = createSelectableCard(role.name, role.definition);
-                card.addEventListener("click", () => selectCard(card, roles, "role", role.name));
-                roleCardsContainer.appendChild(card);
-            });
-        }
+// Fetch roles from the server and display them
+async function fetchRoles() {
+    console.log("Fetching roles from the backend...");
+    try {
+        const response = await fetch("/roles"); // Fetch roles from backend
+        if (!response.ok) throw new Error("Failed to fetch roles");
+        const data = await response.json();
+
+        console.log("Roles fetched successfully:", data.roles);
+        displayRoleCards(data.roles); // Populate roles
+    } catch (error) {
+        console.error("Error fetching roles:", error.message);
+        logStatus(`Error fetching roles: ${error.message}`, true);
+    }
+}
+
+
+// Dynamically display role cards in the roleCards container
+function displayRoleCards(roles) {
+    const roleCardsContainer = document.getElementById("roleCards");
+    roleCardsContainer.innerHTML = ""; // Clear previous roles
+    console.log("Displaying role cards...");
+
+    roles.forEach((role) => {
+        console.log("Creating card for role:", role.name);
+        // Create a card for each role
+        const card = document.createElement("div");
+        card.className = "selectable-card"; // Matches the CSS for selectable cards
+        card.innerHTML = `
+            <h4>${role.name}</h4>
+            <p>${role.definition || "No description available"}</p>
+        `;
+        // Add click event to select the role
+        card.addEventListener("click", () => {
+            console.log(`Role card clicked: ${role.name}`);
+            selectRole(role.name);
+        });
+        roleCardsContainer.appendChild(card);
+    });
+    console.log("Role cards displayed.");
+}
+
+
+
+// Populate the system prompt when a role is selected
+function selectRole(roleName) {
+    console.log(`Fetching system prompt for role: ${roleName}`);
+    fetch("/generate-system-prompt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role: roleName }),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                console.error(`Failed to fetch prompt for role: ${roleName}`);
+                throw new Error(`Error fetching system prompt for ${roleName}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log(`System prompt fetched for role: ${roleName}`, data);
+            if (data.system_prompt) {
+                document.getElementById("systemPrompt").value = data.system_prompt;
+                logStatus(`Fetched prompt for role: ${roleName}`);
+            } else {
+                logStatus(`No prompt found for role: ${roleName}`, true);
+            }
+        })
+        .catch((error) => {
+            console.error(`Error fetching prompt for role: ${roleName}`, error.message);
+            logStatus(`Error fetching prompt: ${error.message}`, true);
+        });
+}
+
+
+
+// Fetch roles on page load
+document.addEventListener("DOMContentLoaded", fetchRoles);
+
     
         // Create a selectable card
         function createSelectableCard(title, description) {

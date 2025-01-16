@@ -1,0 +1,28 @@
+
+    Directory: C:\sandbox\Python\deepseek-drag-drop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         1/15/2025   1:38 PM                .venv
+d-----         1/15/2025   1:38 PM                app
+d-----         1/15/2025   2:32 PM                arch
+d-----         1/15/2025   1:47 PM                config
+d-----         1/15/2025   2:03 PM                documentation
+d-----         1/15/2025  12:59 PM                frontend
+d-----         1/15/2025  12:59 PM                output
+d-----         1/15/2025  12:59 PM                prompts
+d-----         1/15/2025  12:59 PM                templates
+d-----         1/15/2025  12:59 PM                tests
+-a----         1/15/2025  12:59 PM             85 .gitignore
+-a----         1/15/2025  12:59 PM           2088 adjust_files_accepted.py
+-a----         1/15/2025  12:59 PM           2480 config_loader.py
+-a----         1/13/2025  12:04 PM           3033 openai_api_health_check.py
+-a----         1/15/2025  12:59 PM           6978 README.html
+-a----         1/15/2025  12:59 PM           7115 README.md
+-a----         1/15/2025  12:59 PM            123 requirements.txt
+-a----         1/15/2025  12:59 PM           6808 role_definition.json
+-a----         1/15/2025  12:59 PM            167 run.py
+-a----         1/15/2025  12:59 PM           1085 test_cleaning_logic.py
+-a----         1/15/2025  12:59 PM           1122 test_generate_output.py
+-a----         1/15/2025  12:59 PM            606 test_generate_output_2.py

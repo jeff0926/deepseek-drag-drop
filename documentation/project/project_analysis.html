@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Drag-and-Drop App Documentation</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Theme toggle */
+        body.dark-theme {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .dark-theme .header h1 {
+            color: #fff;
+        }
+
+        /* Tabs */
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .tab-button.active {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .dark-theme .tab-button {
+            background: #333;
+            color: #fff;
+        }
+
+        .dark-theme .tab-button.active {
+            background: #4a90e2;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .dark-theme .tab-content {
+            background: #2d2d2d;
+            color: #fff;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            background: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dark-theme .section-header {
+            background: #333;
+        }
+
+        .section-content {
+            padding: 0 20px;
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Lists */
+        ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Features */
+        .feature {
+            padding: 5px 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+
+        .feature.implemented {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feature.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .dark-theme .feature.implemented {
+            background: #1e4620;
+            color: #d4edda;
+        }
+
+        .dark-theme .feature.pending {
+            background: #533f03;
+            color: #fff3cd;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .dark-theme .card {
+            background: #2d2d2d;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1>DeepSeek Drag-and-Drop App</h1>
+            <p>Technical Documentation & Analysis</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTab('overview')">Overview</button>
+                <button class="tab-button" onclick="showTab('core-files')">Core Files</button>
+                <button class="tab-button" onclick="showTab('status')">Status</button>
+                <button class="tab-button" onclick="showTab('next-steps')">Next Steps</button>
+            </div>
+
+            <div id="overview" class="tab-content active">
+                <div class="card">
+                    <h2>Project Overview</h2>
+                    <p>The DeepSeek Drag-and-Drop App is a Flask-based web application that enables:</p>
+                    <ul>
+                        <li>Multiple file uploads via drag-and-drop interface</li>
+                        <li>File metadata extraction and display</li>
+                        <li>Content cleaning and processing</li>
+                        <li>DeepSeek API integration</li>
+                        <li>Role-specific output generation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="core-files" class="tab-content">
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection('backend')">
+                        <h3>Backend Core Files</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div id="backend" class="section-content">
+                        <div class="card">
+                            <h4>__init__.py</h4>
+                            <ul>
+                                <li>Flask application initialization</li>
+                                <li>CORS setup</li>
+                                <li>Environment configuration</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>routes.py</h4>
+                            <ul>
+                                <li>Main application logic</li>
+                                <li>API endpoints management</li>
+                                <li>File processing handlers</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>clean.py</h4>
+                            <ul>
+                                <li>Text cleaning functionality</li>
+                                <li>NLTK integration</li>
+                                <li>Metrics calculation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection('frontend')">
+                        <h3>Frontend Core Files</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div id="frontend" class="section-content">
+                        <div class="card">
+                            <h4>index.html</h4>
+                            <ul>
+                                <li>Main user interface</li>
+                                <li>Drag-and-drop implementation</li>
+                                <li>Role selection interface</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>styles.css</h4>
+                            <ul>
+                                <li>Theme support</li>
+                                <li>Responsive design</li>
+                                <li>Component styling</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>scripts.js</h4>
+                            <ul>
+                                <li>File handling logic</li>
+                                <li>API interactions</li>
+                                <li>UI state management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="status" class="tab-content">
+                <div class="card">
+                    <h2>Current Status</h2>
+                    <h3>Implemented Features</h3>
+                    <div class="feature implemented">✓ Drag-and-drop file upload</div>
+                    <div class="feature implemented">✓ File metadata extraction</div>
+                    <div class="feature implemented">✓ Three-level content cleaning</div>
+                    <div class="feature implemented">✓ DeepSeek API integration</div>
+                    <div class="feature implemented">✓ Role-based prompts</div>
+                    
+                    <h3>Technical Debt</h3>
+                    <div class="feature pending">⚠ Hardcoded API key</div>
+                    <div class="feature pending">⚠ Limited error handling</div>
+                    <div class="feature pending">⚠ Basic testing infrastructure</div>
+                    <div class="feature pending">⚠ No proper logging system</div>
+                </div>
+            </div>
+
+            <div id="next-steps" class="tab-content">
+                <div class="card">
+                    <h2>Next Steps</h2>
+                    <h3>Immediate Priorities</h3>
+                    <ul>
+                        <li>Expand test coverage</li>
+                        <li>Implement robust error handling</li>
+                        <li>Move API key to environment variables</li>
+                        <li>Add input validation</li>
+                    </ul>
+                    
+                    <h3>Future Enhancements</h3>
+                    <ul>
+                        <li>Support for more file types</li>
+                        <li>Advanced processing options</li>
+                        <li>Batch processing capabilities</li>
+                        <li>Enhanced UI/UX features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+
+        // Tab switching
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Section toggling
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('active');
+            
+            // Toggle arrow
+            const arrow = event.currentTarget.querySelector('.toggle-icon');
+            arrow.textContent = section.classList.contains('active') ? '▼' : '▶';
+        }
+    </script>
+</body>
+</html>

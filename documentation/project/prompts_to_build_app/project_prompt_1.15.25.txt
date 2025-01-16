@@ -1,0 +1,272 @@
+# DeepSeek Drag-and-Drop App Implementation Prompt
+
+## System Context
+```
+You are a full-stack developer and solutions architect tasked with implementing the DeepSeek Drag-and-Drop App. This application allows users to upload files, process them using the DeepSeek API, and generate various outputs based on user-selected roles and templates. You understand web technologies including Flask, vanilla JavaScript, HTML5 APIs, and modern CSS patterns. You prioritize clean code, maintainable architecture, and user experience.
+```
+
+## Project Overview
+```
+The DeepSeek Drag-and-Drop App is a web application that combines:
+1. Frontend drag-and-drop file handling
+2. Backend file processing and API integration
+3. Role-based content generation
+4. Dynamic template system
+5. Modern light/dark theme support
+6. File cleaning and optimization
+
+Key Technical Components:
+- Flask backend with Python 3.x
+- Vanilla JavaScript (no frameworks)
+- Modern CSS with theme support
+- File processing with NLTK
+- DeepSeek API integration
+```
+
+## Required File Structure
+```
+deepseek-drag-drop/
+├── app/
+│   ├── __init__.py        # Flask initialization
+│   ├── routes.py          # API endpoints
+│   ├── clean.py           # Text cleaning logic
+│   └── utils/             # Utility functions
+├── config/
+│   ├── role_definition.json     # Role definitions
+│   └── file_types_accepted.json # Supported file types
+├── frontend/
+│   ├── index.html         # Main HTML interface
+│   ├── styles.css         # CSS styling
+│   └── scripts.js         # Frontend JavaScript
+├── templates/             # Output templates
+├── .env                   # Environment variables
+├── requirements.txt       # Python dependencies
+└── run.py                # Application entry point
+```
+
+## Core File Contents
+
+### 1. routes.py Essential Endpoints:
+```python
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/roles", methods=["GET"])
+def get_roles():
+    return jsonify(role_definitions), 200
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    # Handle file upload and DeepSeek API integration
+    pass
+
+@app.route("/clean-files", methods=["POST"])
+def clean_files():
+    # Handle file cleaning
+    pass
+```
+
+### 2. index.html Core Structure:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Drag-and-Drop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <!-- Theme toggle implementation -->
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Dropzone Section -->
+        <!-- Role Selection Section -->
+        <!-- File Cards Section -->
+        <!-- Prompt Area Section -->
+        <!-- Results Section -->
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
+```
+
+### 3. scripts.js Core Functionality:
+```javascript
+// File drag and drop handling
+const dropzone = document.getElementById("dropzone");
+const fileCardsContainer = document.getElementById("fileCards");
+
+// Core event listeners
+dropzone.addEventListener("dragover", handleDragOver);
+dropzone.addEventListener("drop", handleDrop);
+
+// File processing and API interaction
+async function processFiles(files) {
+    // File processing implementation
+}
+
+// Role selection and prompt handling
+function handleRoleSelection(role) {
+    // Role selection implementation
+}
+```
+
+## Configuration Files
+
+### 1. role_definition.json Structure:
+```json
+{
+    "roles": [
+        {
+            "name": "Role Name",
+            "definition": "Role Description",
+            "function": "Role Function",
+            "system_prompt": "Default System Prompt",
+            "outputs": [
+                {
+                    "type": "Output Type",
+                    "description": "Output Description",
+                    "template": "Template Path"
+                }
+            ]
+        }
+    ]
+}
+```
+
+### 2. file_types_accepted.json Structure:
+```json
+{
+    "extensions": [
+        {
+            "extension": ".ext",
+            "confidence": 0.8,
+            "desc": "Description",
+            "type": "File Type",
+            "supports_llm": true,
+            "default_prompt": "Default Prompt",
+            "default_char_limit": 500,
+            "ml_clean": true
+        }
+    ]
+}
+```
+
+## Implementation Steps
+
+1. **Backend Setup**
+   - Initialize Flask application
+   - Set up routes and endpoints
+   - Implement file processing logic
+   - Integrate with DeepSeek API
+   - Implement file cleaning functionality
+
+2. **Frontend Implementation**
+   - Create drag-and-drop interface
+   - Implement file card display
+   - Add role selection interface
+   - Create prompt editing area
+   - Implement theme toggle
+
+3. **Integration Features**
+   - Connect frontend to backend APIs
+   - Implement file upload and processing
+   - Add real-time status updates
+   - Implement error handling
+   - Add loading indicators
+
+4. **Template System**
+   - Create template directory
+   - Implement template loading
+   - Add template processing
+   - Create output generation
+
+## Required Dependencies
+
+```
+Flask==3.0.0
+python-dotenv==1.0.0
+openai>=1.59.6
+flask-cors==4.0.0
+PyPDF2
+nltk
+spacy
+python-docx
+```
+
+## Testing Requirements
+
+1. **File Upload Tests**
+   - Test multiple file uploads
+   - Verify size limits
+   - Check file type validation
+   - Test error handling
+
+2. **API Integration Tests**
+   - Test DeepSeek API connection
+   - Verify prompt processing
+   - Check response handling
+   - Test error scenarios
+
+3. **UI Tests**
+   - Verify drag-and-drop functionality
+   - Test theme switching
+   - Check responsive design
+   - Validate role selection
+
+## Security Considerations
+
+1. **API Security**
+   - Move API keys to environment variables
+   - Implement rate limiting
+   - Add request validation
+   - Secure file uploads
+
+2. **Input Validation**
+   - Sanitize file inputs
+   - Validate prompts
+   - Check file types
+   - Limit file sizes
+
+## User Instructions
+
+The app should:
+1. Allow file drag-and-drop
+2. Display file metadata
+3. Enable role selection
+4. Support prompt customization
+5. Show processing status
+6. Display API responses
+7. Support theme switching
+
+## Quality Requirements
+
+1. **Code Standards**
+   - Follow PEP 8 for Python
+   - Use ES6+ for JavaScript
+   - Implement proper error handling
+   - Add comprehensive comments
+
+2. **Performance**
+   - Optimize file processing
+   - Minimize API calls
+   - Implement caching where appropriate
+   - Optimize frontend assets
+
+## Expected Outputs
+
+The system should generate:
+1. Processed file analysis
+2. Role-based documentation
+3. Technical diagrams
+4. Implementation matrices
+5. Status reports
+
+Please implement each component following these specifications and maintain proper error handling and user feedback throughout the application.

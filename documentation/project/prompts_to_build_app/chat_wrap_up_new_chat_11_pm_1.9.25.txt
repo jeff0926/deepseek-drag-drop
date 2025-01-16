@@ -1,0 +1,192 @@
+Absolutely! Below is a detailed prompt that you can use to start a new chat. It includes all the necessary context, file structures, and instructions so we can immediately continue working on your project.
+
+Detailed Prompt for New Chat
+Context:
+We are building a Flask-based web application that allows users to drag and drop files, extract metadata, and send them to the DeepSeek API for analysis. The app includes the following features:
+
+Drag-and-Drop Interface:
+
+Users can drag and drop up to 10 files at a time.
+
+Each file is displayed as a card with metadata (name, size, format) and options to select or remove the file.
+
+Payload Construction:
+
+The payload sent to the DeepSeek API includes:
+
+A system prompt (e.g., "You are a helpful assistant.").
+
+A user prompt (e.g., "Summarize the following files.").
+
+The content of all valid text files, prefixed by the file name.
+
+Backend and Frontend Integration:
+
+The backend is built with Flask and handles file processing and API calls.
+
+The frontend is built with HTML, CSS, and JavaScript and handles the UI and user interactions.
+
+Files and Code:
+
+1. Backend (app/ Folder)
+__init__.py:
+
+python
+Copy
+from flask import Flask
+from flask_cors import CORS
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Initialize the Flask app
+app = Flask(__name__, static_folder="../frontend", template_folder="../frontend")
+CORS(app)
+
+# Import routes after the app is created to avoid circular imports
+from app import routes
+routes.py:
+
+python
+Copy
+from flask import request, jsonify, render_template
+from app import app
+from openai import OpenAI
+import os
+import json
+
+# Hardcoded API Key for POC
+api_key = "sk-48aad28f8ec54da1ba5a0f8b2bbd1f22"
+client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+
+@app.route('/')
+def home():
+    return render_template("index.html")
+
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    try:
+        # Parse JSON payload from the frontend
+        payload = request.get_json()
+        if not payload:
+            return jsonify({"error": "Invalid JSON payload"}), 400
+
+        system_prompt = payload.get("system_prompt")
+        user_prompt = payload.get("user_prompt")
+        files = payload.get("files", [])
+
+        if not system_prompt or not user_prompt or not files:
+            return jsonify({"error": "Prompts and files are required"}), 400
+
+        # Combine file content with prompts
+        combined_prompt = f"{system_prompt}\n\n{user_prompt}\n\nFiles:\n"
+        for file in files:
+            combined_prompt += f"File: {file['name']}\n{file['content']}\n\n"
+
+        # Call DeepSeek API
+        response = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[{"role": "user", "content": combined_prompt}],
+            stream=False
+        )
+        return jsonify({"response": response.choices[0].message.content})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+2. Frontend (frontend/ Folder)
+index.html:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Drag-and-Drop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dropzone" id="dropzone">Drop files here (max 10)</div>
+        <div class="status-area" id="statusArea">
+            <h3>Status Logs:</h3>
+            <div id="statusLogs"></div>
+        </div>
+        <div class="file-cards" id="fileCards"></div>
+        <div class="prompt-area">
+            <label for="systemPrompt">System Prompt:</label>
+            <textarea id="systemPrompt" rows="2"></textarea>
+            <label for="userPrompt">User Prompt:</label>
+            <textarea id="userPrompt" rows="2"></textarea>
+            <button id="sendToLLM">Send to LLM</button>
+            <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <span>Processing...</span>
+            </div>
+        </div>
+        <div class="results" id="results">
+            <h3>LLM Response:</h3>
+            <p id="llmResponse"></p>
+        </div>
+        <div class="payload-area" id="payloadArea">
+            <h3>Payload Sent to API:</h3>
+            <pre id="payload"></pre>
+            <p><strong>Word Count:</strong> <span id="wordCount">0</span></p>
+            <p><strong>Token Count:</strong> <span id="tokenCount">0</span></p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
+Run HTML
+styles.css:
+
+css
+Copy
+/* Add your CSS styles here */
+scripts.js:
+
+javascript
+Copy
+// Add your JavaScript code here
+3. Entry Point (run.py)
+run.py:
+
+python
+Copy
+from app import app
+
+if __name__ == "__main__":
+    app.run(debug=True)
+4. Environment Variables (.env)
+.env:
+
+Copy
+DEEPSEEK_API_KEY=sk-48aad28f8ec54da1ba5a0f8b2bbd1f22
+FLASK_ENV=development
+5. Requirements (requirements.txt)
+requirements.txt:
+
+Copy
+Flask==3.0.0
+python-dotenv==1.0.0
+openai==1.0.0
+flask-cors==4.0.0
+Instructions for New Chat:
+
+Copy and Paste:
+
+Copy the above files and folder structure into your project.
+
+Start a new chat and paste this prompt to provide context.
+
+Continue Development:
+
+Let me know what specific features or improvements you’d like to work on next (e.g., handling binary files, improving the UI, adding more metadata).
+
+Ask Questions:
+
+If you have any questions or run into issues, feel free to ask!
